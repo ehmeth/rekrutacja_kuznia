@@ -32,7 +32,5 @@ class oddzial
 
 	void segregujUczniow (int liczba_uczniow, Uczen tab[]);
 
-// hello tutaj kacper
-
 };
 #endif

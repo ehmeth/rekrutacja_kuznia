@@ -22,13 +22,15 @@ bool oddzial::wypiszListeUczniow(std::string oddzial_csv)
     ofstream outfile (oddzial_csv.c_str());
         if (outfile.is_open())
         {
-            for (int i = 0; i <liczba_uczniow_w_oddziale; i++) {
+            for (int i = 0; i <liczba_uczniow_w_oddziale; i++)
+            {
                 outfile << lista_uczniow_w_oddziale[i].podaj_nazwisko() << '\n';
             }
-
             outfile.close();
-         } else {
-  }
+        } else
+        {
+
+        }
   return false;
 }
 
