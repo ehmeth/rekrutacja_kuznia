@@ -15,9 +15,16 @@ int Nabor::ilosc()
 	return Nabor::ilu;
 }
 
-Nabor::Nabor(std::string sciezka_do_pliku)
+Nabor::Nabor(std::string sciezka_do_pliku, int liczbaOddzialow, int uczniowWOddziale)
 :sciezka(sciezka_do_pliku) 
 	{
+	if (liczbaOddzialow <= 0 || uczniowWOddziale <= 0)
+	{
+		cout << "Liczba oddzialow lub liczba uczniow w oddziale jest rowna lub mniejsza od zera -- Nabor::Nabor" << endl;
+		getchar();
+	}
+	wielkosc_naboru = liczbaOddzialow*uczniowWOddziale;
+	tab = new Uczen[wielkosc_naboru];
 	if(wpis_z_pliku(Nabor::sciezka, Nabor::tab) == false ) 
 	{
 		cout<<"Blad podczas otwierania pliku! -- Nabor::Nabor"<<endl;
@@ -62,7 +69,7 @@ Uczen::wybor Nabor::str_to_wybor(string str)
 
 Uczen::jezyk Nabor::str_to_jezyk(string str)
 	{
-		for(int i = 0; i<str.length(); i++)
+		for(unsigned int i = 0; i<str.length(); i++)
 		{
 			if(str[i] == '\0') break;
 			str[i] = tolower(str[i]);
@@ -101,13 +108,13 @@ bool Nabor::wpis_z_pliku(const string sciezka, Uczen tab[])
 		{
 			if(n > max_indeks_n)
 			{
-				cout<<"Zly format pliku, zbyt du?a ilosc kom?rek danych w wierszu -- Nabor::wpis_z_pliku"<<endl;
+				cout<<"Zly format pliku, zbyt duza ilosc komorek danych w wierszu -- Nabor::wpis_z_pliku"<<endl;
 				getchar();
 				return false;
 			}
 			if (  n < 0)
 			{
-				cout<<"Ujemna liczba kom?rek danych w wierszu...? -- Nabor::wpis_z_pliku"<<endl;
+				cout<<"Ujemna liczba komorek danych w wierszu...? -- Nabor::wpis_z_pliku"<<endl;
 				getchar();
 				return false;
 			}
