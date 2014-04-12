@@ -21,7 +21,7 @@ using namespace std;
 // - Wynikiem dzia³ania programu powinno byæ 6 plików zawieraj¹cych imiona i nazwiska uczniów przydzielonych do danej klasy. Wpisy powinny byæ posortowane alfabetycznie wed³ug nazwiska.
 int main()
 {
-	sekretariat oSekretariat("C:\\Users\\user\\Desktop\\GiT\\rekrutacja_kuznia\\lista.csv");
-	getchar();
+	sekretariat oSekretariat("lista.csv");
+	
 	return 0;
 }
