@@ -216,3 +216,5 @@ pip-log.txt
 *.exe
 *.o
 Makefile.win
+*.dev
+*.layout
