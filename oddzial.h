@@ -30,10 +30,9 @@ class oddzial
 	int liczba_uczniow_w_oddziale;
 	Uczen lista_uczniow_w_oddziale[max_licz_uczniow];
 	
-	bool segregujUczniow ();
+	void segregujUczniow (int liczba_uczniow, Uczen tab[]);
 	
-	// kostruktor do zrobienia
-	//oddzial()
-	//oddzial(int liczba_uczniow_w_oddziale)  //konstruktor
+
+
 };
 #endif

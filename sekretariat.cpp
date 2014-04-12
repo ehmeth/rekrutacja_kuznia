@@ -44,12 +44,14 @@ bool sekretariat::start (std::string plik_csv)
 //			}
 //		}
 //	}
+	return false;
 }
 
 
 
 bool sekretariat::stworzOddzialy ()
 {
+	return false;
 } 
 
 	////dodane przez marka
