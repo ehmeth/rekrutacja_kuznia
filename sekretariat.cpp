@@ -6,32 +6,32 @@ bool sekretariat::start (std::string plik_csv)
 {
 	Nabor nowyNabor(plik_csv);
 	Uczen kandydat;
-	oddzial klasa[Uczen::wybor::MAX_WYBOR];
+	oddzial klasa[Uczen::MAX_WYBOR];
 	bool kandydatDodany;
-	
+
 	for (int i = 0; i < nowyNabor.ilosc(); i++) // przypisanie uczniow do oddzialow
 	{
 		kandydatDodany = false;
-		
+
 		if (nowyNabor.podaj_ucznia(i, &kandydat))
 		{
 			if (kandydat.podaj_jezyk() == kandydat.niemiecki) // dodawanie kandydat z jez. niemieckim do klasy C
 			{
-				klasa[kandydat.C].dodajUcznia(kandydat);				
+				klasa[kandydat.C].dodajUcznia(kandydat);
 			}
 			else // dodawanie po preferencjach pozostalych kandydatow do pozostalych klas
 			{
-				
+
 				for (int j = 0; j < 3; j++) // j = preferencje kandydata, sa 3
 				{
 					if(klasa[kandydat.podaj_wybor(j)].dodajUcznia(kandydat))
 					{
 						kandydatDodany = true; // kandydat dodany wg swoich preferencji
 						break;
-					}					
-				
+					}
+
 				}
-				if (kandydatDodany == false) 
+				if (kandydatDodany == false)
 				// nieudane przypisanie po preferencjach, przypisanie do pierwszego wolnego miejsca
 				{
 
@@ -65,11 +65,11 @@ bool sekretariat::stworzOddzialy ()
 {
 	return false;
 
-} 
+}
 
 	////dodane przez marka
 	//konstruktor:
-	
+
 sekretariat::sekretariat(std::string plik_csv)
 	{
 		start(plik_csv);
