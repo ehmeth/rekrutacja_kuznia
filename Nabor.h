@@ -25,4 +25,7 @@ class Nabor
 	bool wpis_z_pliku(std::string sciezka, Uczen tab[] );
 	void sortuj(int ilosc, Uczen tab[]);
 };
+
+// Wojtek: glupi comment 
+
 #endif
