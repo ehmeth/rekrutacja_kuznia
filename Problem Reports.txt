@@ -1,0 +1,14 @@
+- Sortowanie po nazwiskach A-Z
+
+- Plik wejœciowy wiêkszy ni¿ 132 = wysyp programu
+
+- Widzê pliki wyjœciowe, ale nie wiem kto dlaczego siê gdzie znalaz³ (?)
+
+
+
+Nowe wymagania:
+- mogê wybraæ iloœæ oddzia³ów
+- mogê wybraæ iloœæ uczniów w oddziale
+- max iloœæ uczniów w pliku wejœciowym to liczbaOddzialow * uczniowWOddziale
+- podaje nazwê pliku z linii komend
+- sensowne komunikaty b³êdów
