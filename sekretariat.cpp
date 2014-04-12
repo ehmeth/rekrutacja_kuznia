@@ -5,46 +5,58 @@
 bool sekretariat::start (std::string plik_csv)
 {
 	Nabor nowyNabor(plik_csv);
-//	Uczen kandydat;
-//	oddzial klasy[uczen::wybor::MAX_WYBOR];
-//	
-//	for(int i = 0; i < rozmiar; i++) // przypisanie uczniow do oddzialow
-//	{
-//		bool kandydatDodany = false;
-//		
-//		if (nowyNabor.podaj_ucznia(i, &kandydat))
-//		{
-//			if (kandydat.podaj_jezyk == uczen::jezyk::niemiecki) // kandydat z jez. niemieckim
-//			{
-//				klasa[C].dodajUcznia(kandydat);				
-//			}
-//			else // dodawanie po preferencjach kandydata
-//			{
-//				
-//				for (int j = 0; j < 3; j++) // j = preferencje kandydata
-//				{
-//					int X = kandydat.podaj_wybor(j);
-//					if(klasa[X].dodajUcznia(kandydat))
-//					{
-//						kandydatDodany = true; // kandydat dodany wg swoich preferencji
-//						break;
-//					}					
-//					
-//				}
-//				if (kandydatDodany == false) 
-//				// nieudane przypisanie po preferencjach, przypisanie do pierwszego wolnego miejsca
-//				{
-//					for (int j = 0; j < 6; j++) // j = numery wszystkich oddzialow
-//					{
-//						if(klasa[j].dodajUcznia(kandydat))
-//						// TO DO						
-//					}
-//				}
-//				//dodaje ucznia do pierwszej klasy w ktorej sa wolne miejsca
-//			}
-//		}
-//	}
-	return false;
+	Uczen kandydat;
+	oddzial klasa[Uczen::wybor::MAX_WYBOR];
+	bool kandydatDodany;
+	
+	for (int i = 0; i < nowyNabor.ilosc(); i++) // przypisanie uczniow do oddzialow
+	{
+		kandydatDodany = false;
+		
+		if (nowyNabor.podaj_ucznia(i, &kandydat))
+		{
+			if (kandydat.podaj_jezyk() == kandydat.niemiecki) // dodawanie kandydat z jez. niemieckim do klasy C
+			{
+				klasa[kandydat.C].dodajUcznia(kandydat);				
+			}
+			else // dodawanie po preferencjach pozostalych kandydatow do pozostalych klas
+			{
+				
+				for (int j = 0; j < 3; j++) // j = preferencje kandydata, sa 3
+				{
+					if(klasa[kandydat.podaj_wybor(j)].dodajUcznia(kandydat))
+					{
+						kandydatDodany = true; // kandydat dodany wg swoich preferencji
+						break;
+					}					
+				
+				}
+				if (kandydatDodany == false) 
+				// nieudane przypisanie po preferencjach, przypisanie do pierwszego wolnego miejsca
+				{
+
+					for (int j = 0; j < kandydat.MAX_WYBOR; j++) // j = numery wszystkich oddzialow
+					{
+						if (klasa[j].dodajUcznia(kandydat))
+						{
+							kandydatDodany = true; // kandydat dodany wg swoich preferencji
+							break;
+						}
+					}
+				}
+				//dodaje ucznia do pierwszej klasy w ktorej sa wolne miejsca
+			}
+		}
+	} // for (int i = 0; i < nowyNabor.ilosc(); i++)
+
+	klasa[kandydat.A].wypiszListeUczniow("klasaA.csv");
+	klasa[kandydat.B].wypiszListeUczniow("klasaB.csv");
+	klasa[kandydat.C].wypiszListeUczniow("klasaC.csv");
+	klasa[kandydat.D].wypiszListeUczniow("klasaD.csv");
+	klasa[kandydat.E].wypiszListeUczniow("klasaE.csv");
+	klasa[kandydat.F].wypiszListeUczniow("klasaF.csv");
+
+	return kandydatDodany;
 }
 
 
@@ -52,6 +64,7 @@ bool sekretariat::start (std::string plik_csv)
 bool sekretariat::stworzOddzialy ()
 {
 	return false;
+
 } 
 
 	////dodane przez marka
