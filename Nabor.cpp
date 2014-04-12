@@ -28,7 +28,7 @@ Nabor::Nabor(std::string sciezka_do_pliku)
 bool Nabor::podaj_ucznia(int ktory, Uczen *kto)
 	{
 	if(ktory<0 || ktory>Nabor::ilu) return false;
-	*kto = tab[ktory];
+	*kto = Nabor::tab[ktory];
 	return true;
 	}
 
@@ -60,7 +60,7 @@ Uczen::wybor Nabor::str_to_wybor(string str)
 	return Uczen::UNINITIALIZED; 
 	}
 
-Uczen::jezyk Nabor::str_to_jezyk(std::string str)
+Uczen::jezyk Nabor::str_to_jezyk(string str)
 	{
 		for(int i = 0; i<str.length(); i++)
 		{
@@ -115,12 +115,15 @@ bool Nabor::wpis_z_pliku(const string sciezka, Uczen tab[])
  		    s.erase(0, pos + delimiter.length());
  		    n++;
 		}
+			temp[n] = s.substr(0, pos);
+ 			s.erase(0, pos + delimiter.length());
+ 		
 		punkty = atoi(temp[punkty_e].c_str()); 
-		jezyk = str_to_jezyk(temp[wybor_3]); 
+		jezyk = str_to_jezyk(temp[jezyk_e]); 
 		if(jezyk == Uczen::niemiecki) punkty += niemecki_dodatkowe_punkty;
-		wybor1 = str_to_wybor(temp[jezyk_e]); 
-		wybor2 = str_to_wybor(temp[wybor_1]); 
-		wybor3 = str_to_wybor(temp[wybor_2]); 
+		wybor1 = str_to_wybor(temp[wybor_1]); 
+		wybor2 = str_to_wybor(temp[wybor_2]); 
+		wybor3 = str_to_wybor(temp[wybor_3]); 
 		tab[i] = Uczen(temp[Imie_e],temp[Nazwisko_e],punkty,jezyk, wybor1, wybor2,wybor3); 
 		i++;
  	}
@@ -132,7 +135,6 @@ bool Nabor::wpis_z_pliku(const string sciezka, Uczen tab[])
 
 void Nabor::sortuj(int ilosc, Uczen tab[])
 	{
-	Uczen temp;
 	for(int i = ilosc - 1; i>=0; i--)
 		for(int l = 0; l<i; l++)
 			{

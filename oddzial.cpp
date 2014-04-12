@@ -19,6 +19,8 @@ bool oddzial::dodajUcznia (Uczen kandydat)
 
 bool oddzial::wypiszListeUczniow(std::string oddzial_csv)
 {
+	oddzial::segregujUczniow(oddzial::liczba_uczniow_w_oddziale,oddzial::lista_uczniow_w_oddziale);
+	
 	 ofstream outfile (oddzial_csv.c_str());
 if (outfile.is_open())
   {
@@ -34,7 +36,25 @@ if (outfile.is_open())
   return false;
 }
 
-bool oddzial::segregujUczniow()
+void oddzial::segregujUczniow(int liczba_uczniow, Uczen tab[])
+
 	{
-		return false;
+	
+	for(int i = liczba_uczniow - 1; i>=0; i--)
+		for(int l = 0; l<i; l++)
+			{
+				if(tab[l].podaj_nazwisko() < tab[l+1].podaj_nazwisko())
+					{
+						std::swap(tab[l], tab[l+1] );
+
+					}
+			}
 	}
+
+
+
+
+
+		
+	
+	
