@@ -38,9 +38,10 @@ void oddzial::segregujUczniow(int liczba_uczniow, Uczen tab[])
 	{
 
 	for (int i = liczba_uczniow - 1; i >= 0; i--)
+	//for (int i = 0; i < liczba_uczniow; i++)
 		for(int l = 0; l<i; l++)
 			{
-				if(tab[l].podaj_nazwisko() < tab[l+1].podaj_nazwisko())
+				if(tab[l].podaj_nazwisko() > tab[l+1].podaj_nazwisko())
 					{
 						std::swap(tab[l], tab[l+1] );
 

@@ -30,7 +30,7 @@ Uczen::Uczen(std::string aNazwisko,std::string aImie,int aPunkty,
 
 std::string Uczen::podaj_nazwisko()
 {
-	return nazwisko + " " + imie;
+	return imie + " " + nazwisko;
 }
 
 int Uczen::podaj_liczba_punktow()
