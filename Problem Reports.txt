@@ -1,5 +1,5 @@
 - Sortowanie po nazwiskach A-Z
-- Plik wejsciowy wiekszy ni¿ 132 = wysyp programu
+- Plik wejsciowy wiekszy niz 132 = wysyp programu
 
 
 Nowe wymagania:
