@@ -11,7 +11,7 @@ bool oddzial::dodajUcznia (Uczen kandydat)
         liczba_uczniow_w_oddziale++;
         return true;
 	}
-	cout << "Error -- dodajUcznia" << endl;
+	// cout << "Error -- dodajUcznia" << endl;
 	return false;
 
 }
