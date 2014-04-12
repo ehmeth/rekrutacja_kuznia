@@ -21,7 +21,19 @@ using namespace std;
 // - Wynikiem dzia³ania programu powinno byæ 6 plików zawieraj¹cych imiona i nazwiska uczniów przydzielonych do danej klasy. Wpisy powinny byæ posortowane alfabetycznie wed³ug nazwiska.
 int main()
 {
-	sekretariat oSekretariat("lista.csv");
-	
-	return 0;
+		Nabor nabor1("C:\\Users\\user\\Desktop\\GiT\\rekrutacja_kuznia\\lista.csv");
+		Uczen ktos;
+		oddzial oddzial1;
+
+		for (int i = 0; i< 22; i++)
+		{
+			nabor1.podaj_ucznia(i, &ktos);
+			oddzial1.dodajUcznia(ktos);
+			cout << ktos.podaj_nazwisko() << endl;
+			cout << ktos.podaj_liczba_punktow() << endl;
+			cout << ktos.podaj_jezyk() << endl;
+		}
+		oddzial1.wypiszListeUczniow("ListaWyp.txt");
+		getchar();
+		return 0;
 }

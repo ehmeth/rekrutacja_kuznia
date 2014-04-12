@@ -21,8 +21,10 @@ class oddzial
 	Zwracane:
 	true - udalo sie wyeksportowac dane do pliku zewnetrzego,
 	false - nie udalo sie
-
 */
+
+	oddzial() 
+	:liczba_uczniow_w_oddziale(0) {};
 	bool wypiszListeUczniow (std::string oddzial_csv);
 
 	private:
@@ -31,6 +33,8 @@ class oddzial
 	Uczen lista_uczniow_w_oddziale[max_licz_uczniow];
 
 	void segregujUczniow (int liczba_uczniow, Uczen tab[]);
+
+
 
 };
 #endif
