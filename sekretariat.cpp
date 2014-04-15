@@ -7,12 +7,10 @@ bool sekretariat::start (std::string plik_csv)
 	Nabor nowyNabor(plik_csv,6,22);
 	Uczen kandydat;
 	oddzial klasa[Uczen::MAX_WYBOR];
-	bool kandydatDodany;
+	bool kandydatDodany = false;
 
 	for (int i = 0; i < nowyNabor.ilosc(); i++) // przypisanie uczniow do oddzialow
 	{
-		kandydatDodany = false;
-
 		if (nowyNabor.podaj_ucznia(i, &kandydat))
 		{
 			if (kandydat.podaj_jezyk() == kandydat.niemiecki) // dodawanie kandydat z jez. niemieckim do klasy C
@@ -56,7 +54,7 @@ bool sekretariat::start (std::string plik_csv)
 	klasa[kandydat.E].wypiszListeUczniow("klasaE.csv");
 	klasa[kandydat.F].wypiszListeUczniow("klasaF.csv");
 
-	return kandydatDodany;
+	return kandydatDodany = true;
 }
 
 
