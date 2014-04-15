@@ -4,7 +4,7 @@
 
 bool sekretariat::start (std::string plik_csv)
 {
-	Nabor nowyNabor(plik_csv);
+	Nabor nowyNabor(plik_csv,6,22);
 	Uczen kandydat;
 	oddzial klasa[Uczen::MAX_WYBOR];
 	bool kandydatDodany;
