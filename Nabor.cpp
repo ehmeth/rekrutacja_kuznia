@@ -15,27 +15,43 @@ int Nabor::ilosc()
 	return Nabor::ilu;
 }
 
-Nabor::Nabor(std::string sciezka_do_pliku, int liczbaOddzialow, int uczniowWOddziale)
-:sciezka(sciezka_do_pliku) 
+
+Nabor::Nabor(std::string sciezka_do_pliku)
 	{
-	if (liczbaOddzialow <= 0 || uczniowWOddziale <= 0)
+	if (sciezka_do_pliku == "")
 	{
-		cout << "Liczba oddzialow lub liczba uczniow w oddziale jest rowna lub mniejsza od zera -- Nabor::Nabor" << endl;
+		cout << "Brak sciezki do pliku! -- Nabor::Nabor" << endl;
 		getchar();
 	}
-	wielkosc_naboru = liczbaOddzialow*uczniowWOddziale;
-	tab = new Uczen[wielkosc_naboru];
-	if(wpis_z_pliku(Nabor::sciezka, Nabor::tab) == false ) 
+	if (wpis_z_pliku(sciezka_do_pliku, 0) == false)
 	{
-		cout<<"Blad podczas otwierania pliku! -- Nabor::Nabor"<<endl;
+		cout<<"Blad podczas wpisywania danych z pliku! -- Nabor::Nabor"<<endl;
 		getchar();
 	}
 	}
+Nabor::Nabor(std::string sciezka_do_pliku, unsigned int a, unsigned int b)
+{
+	ilu = a*b;
+	if (sciezka_do_pliku == "")
+	{
+		cout << "Brak sciezki do pliku! -- Nabor::Nabor" << endl;
+		getchar();
+	}
+	if (wpis_z_pliku(sciezka_do_pliku, 1) == false)
+	{
+		cout << "Blad podczas wpisywania danych z pliku! -- Nabor::Nabor" << endl;
+		getchar();
+	}
+}
 
 bool Nabor::podaj_ucznia(int ktory, Uczen *kto)
 	{
-	if(ktory<0 || ktory>Nabor::ilu) return false;
-	*kto = Nabor::tab[ktory];
+	if (ktory<0 || ktory>Nabor::ilu)
+	{
+		cout << "Uczen o podanym indeksie nie istnieje -- Nabor::podaj_ucznia" << endl;
+		return false;
+	}
+	*kto = tab[ktory];
 	return true;
 	}
 
@@ -79,7 +95,7 @@ Uczen::jezyk Nabor::str_to_jezyk(string str)
 	return Uczen::DUNNO; 
 	}
 
-bool Nabor::wpis_z_pliku(const string sciezka, Uczen tab[])
+bool Nabor::wpis_z_pliku(const string sciezka, bool tryb)
 	{
 	Uczen::jezyk jezyk;
 	Uczen::wybor wybor1;
@@ -100,6 +116,18 @@ bool Nabor::wpis_z_pliku(const string sciezka, Uczen tab[])
         getchar();
         return false;
     }
+	if (tryb)
+	{
+		while (getline(plik, s))
+		{
+			i++;
+		}
+		plik.clear(); //Wyczyszczenie bufora i ustawienie wskaŸnika wen¹trz pliku na jego pocz¹tek 
+		plik.seekg(0, plik.beg);
+		ilu = i;
+	}
+	tab = new Uczen[ilu];
+	i = 0;
  	while(getline(plik,s))
  	{
  		n = 0;
@@ -134,9 +162,8 @@ bool Nabor::wpis_z_pliku(const string sciezka, Uczen tab[])
 		tab[i] = Uczen(temp[Imie_e],temp[Nazwisko_e],punkty,jezyk, wybor1, wybor2,wybor3); 
 		i++;
  	}
- 	Nabor::ilu = i;
     plik.close();
-    sortuj(Nabor::ilu,Nabor::tab);
+    sortuj(ilu,tab);
     return true;
 	}
 
@@ -152,4 +179,3 @@ void Nabor::sortuj(int ilosc, Uczen tab[])
 					}
 			}
 	}
-
