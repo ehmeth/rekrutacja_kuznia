@@ -54,7 +54,7 @@ bool sekretariat::start (std::string plik_csv)
 	klasa[kandydat.E].wypiszListeUczniow("klasaE.csv");
 	klasa[kandydat.F].wypiszListeUczniow("klasaF.csv");
 
-	return kandydatDodany = true;
+	return kandydatDodany;
 }
 
 
