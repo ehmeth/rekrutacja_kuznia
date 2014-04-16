@@ -20,7 +20,7 @@ Nabor::Nabor(std::string sciezka_do_pliku)
 	if (sciezka_do_pliku == "")
 	{
 		cout << "Brak sciezki do pliku! -- Nabor::Nabor" << endl;
-		getchar();
+		getchar();	// TODO: wyrzucic wszyskie getchar
 	}
 	if (wpis_z_pliku(sciezka_do_pliku, 0) == false)
 	{
@@ -60,7 +60,7 @@ bool Nabor::podaj_ucznia(int ktory, Uczen *kto)
 
 /* Metody Prywatne : */
 
-enum indeksy
+enum indeksy // TODO: do pliku .h
 {
 	Imie_e = 0,
 	Nazwisko_e,

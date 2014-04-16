@@ -8,7 +8,7 @@ bool sekretariat::start (std::string plik_csv)
 {
 	Nabor nowyNabor(plik_csv,6,22);	// TODO: nie robimy magic numbers
 	Uczen kandydat;
-	oddzial klasa[Uczen::MAX_WYBOR];
+	oddzial klasa[Uczen::MAX_WYBOR]; // TODO: slowo kluczowe "klasa" jest niefortunne
 	bool kandydatDodany = false;
 
 	for (int i = 0; i < nowyNabor.ilosc(); i++) // przypisanie uczniow do oddzialow
@@ -53,7 +53,7 @@ bool sekretariat::start (std::string plik_csv)
 	} // for (int i = 0; i < nowyNabor.ilosc(); i++)
 
 	klasa[kandydat.A].wypiszListeUczniow("klasaA.csv"); // TODO: nie sprawdzamy, co zwrocila funkcja wypiszListeUczniow
-	klasa[kandydat.B].wypiszListeUczniow("klasaB.csv");
+	klasa[kandydat.B].wypiszListeUczniow("klasaB.csv"); // TODO: Uczen::B ?
 	klasa[kandydat.C].wypiszListeUczniow("klasaC.csv");
 	klasa[kandydat.D].wypiszListeUczniow("klasaD.csv");
 	klasa[kandydat.E].wypiszListeUczniow("klasaE.csv");
