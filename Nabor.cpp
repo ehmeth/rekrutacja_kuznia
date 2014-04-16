@@ -12,9 +12,8 @@ using namespace std;
 /* Metody Publiczne : */
 int Nabor::ilosc()
 {
-	return Nabor::ilu; // TODO: czemu Nabor:: ?
+	return ilu; 
 }
-
 
 Nabor::Nabor(std::string sciezka_do_pliku)
 {
@@ -30,9 +29,9 @@ Nabor::Nabor(std::string sciezka_do_pliku)
 	}
 }
 
-Nabor::Nabor(std::string sciezka_do_pliku, unsigned int a, unsigned int b) // TODO: Serio? Zmienne a i b?
+Nabor::Nabor(std::string sciezka_do_pliku, unsigned int ilosc_grup, unsigned int ilosc_uczniow_na_grupe)
 {
-	ilu = a*b;
+	ilu = ilosc_grup*ilosc_uczniow_na_grupe;
 	if (sciezka_do_pliku == "")
 	{
 		cout << "Brak sciezki do pliku! -- Nabor::Nabor" << endl;
@@ -47,7 +46,7 @@ Nabor::Nabor(std::string sciezka_do_pliku, unsigned int a, unsigned int b) // TO
 
 bool Nabor::podaj_ucznia(int ktory, Uczen *kto)
 {
-	if (ktory<0 || ktory>Nabor::ilu) // TODO: czemu Nabor:: ? Co jesli ktory == ilu?
+	if (ktory<0 || ktory>=ilu) 
 	{
 		cout << "Uczen o podanym indeksie nie istnieje -- Nabor::podaj_ucznia" << endl;
 		return false;
@@ -96,7 +95,7 @@ Uczen::jezyk Nabor::str_to_jezyk(string str)
 	return Uczen::DUNNO;
 }
 
-bool Nabor::wpis_z_pliku(const string sciezka, bool tryb) // TODO: znaczy jaki tryb?
+bool Nabor::wpis_z_pliku(const string sciezka, bool is_ilu) 
 {
 	Uczen::jezyk jezyk;
 	Uczen::wybor wybor1;
@@ -104,9 +103,9 @@ bool Nabor::wpis_z_pliku(const string sciezka, bool tryb) // TODO: znaczy jaki t
 	Uczen::wybor wybor3;
 
 	const int niemecki_dodatkowe_punkty = 101, max_indeks_n = 6, ilosc_komorek_danych = 7;
-	int n = 0, i = 0, punkty = 0; // TODO: n oraz i nic sensownego nie oznaczaja
+	int indeks_komorki_danych = 0, indeks_ucznia = 0, punkty = 0; 
 
-	string s, temp[ilosc_komorek_danych]; // TODO: zmienic nazwe s
+	string zawartosc_komorki_danych, temp[ilosc_komorek_danych]; // TODO: zmienic nazwe s
 	const std::string delimiter = ";";
 
 	ifstream plik;
@@ -117,51 +116,57 @@ bool Nabor::wpis_z_pliku(const string sciezka, bool tryb) // TODO: znaczy jaki t
 		getchar();
 		return false;
 	}
-	if (tryb) // TODO: znaczy, ze co tryb?
+	if (!is_ilu)
 	{
-		while (getline(plik, s))
+		while (getline(plik, zawartosc_komorki_danych))
 		{
-			i++;
+			indeks_ucznia++;
 		}
 		plik.clear(); //Wyczyszczenie bufora i ustawienie wskaŸnika wen¹trz pliku na jego pocz¹tek 
 		plik.seekg(0, plik.beg);
-		ilu = i;
+		ilu = indeks_ucznia;
 	}
 	tab = new Uczen[ilu];
-	i = 0;
-	while (getline(plik, s))
+	indeks_ucznia = 0;
+	while (getline(plik, zawartosc_komorki_danych))
 	{
-		n = 0;
+		indeks_komorki_danych = 0;
 		size_t pos = 0;
-		while ((pos = s.find(delimiter)) != std::string::npos)
+		while ((pos = zawartosc_komorki_danych.find(delimiter)) != std::string::npos)
 		{
-			if (n > max_indeks_n)
+			if (indeks_komorki_danych > max_indeks_n)
 			{
-				cout << "Zly format pliku, zbyt duza ilosc komorek danych w wierszu -- Nabor::wpis_z_pliku" << endl;
+				cout << "Zly format pliku, zbyt duza ilosc komorek danych w wierszu. Uczen: " << indeks_ucznia << "  -- Nabor::wpis_z_pliku" << endl;
 				getchar();
 				return false;
 			}
-			if (n < 0)
+			if (indeks_komorki_danych < 0)
 			{
-				cout << "Ujemna liczba komorek danych w wierszu...? -- Nabor::wpis_z_pliku" << endl;
+				cout << "Ujemna liczba komorek danych w wierszu...? Uczen: " << indeks_ucznia << " -- Nabor::wpis_z_pliku" << endl;
 				getchar();
 				return false;
 			}
-			temp[n] = s.substr(0, pos);
-			s.erase(0, pos + delimiter.length());
-			n++;
+			temp[indeks_komorki_danych] = zawartosc_komorki_danych.substr(0, pos);
+			zawartosc_komorki_danych.erase(0, pos + delimiter.length());
+			indeks_komorki_danych++;
 		}
-		temp[n] = s.substr(0, pos);
-		s.erase(0, pos + delimiter.length());
+		temp[indeks_komorki_danych] = zawartosc_komorki_danych.substr(0, pos);
+		zawartosc_komorki_danych.erase(0, pos + delimiter.length());
 
-		punkty = atoi(temp[punkty_e].c_str()); // TODO: Brak sprawdzenia zakresu liczb
+		punkty = atoi(temp[punkty_e].c_str());
+		if (punkty<0 || punkty>100)
+		{
+			cout << "Blad! Niepoprawna ilosc punktow! Uczen: " << indeks_ucznia << " -- Nabor::wpis_z_pliku" << endl;
+			getchar();
+			return false;
+		}
 		jezyk = str_to_jezyk(temp[jezyk_e]);
 		if (jezyk == Uczen::niemiecki) punkty += niemecki_dodatkowe_punkty;
 		wybor1 = str_to_wybor(temp[wybor_1]);
 		wybor2 = str_to_wybor(temp[wybor_2]);
 		wybor3 = str_to_wybor(temp[wybor_3]);
-		tab[i] = Uczen(temp[Imie_e], temp[Nazwisko_e], punkty, jezyk, wybor1, wybor2, wybor3);
-		i++;
+		tab[indeks_ucznia] = Uczen(temp[Imie_e], temp[Nazwisko_e], punkty, jezyk, wybor1, wybor2, wybor3);
+		indeks_ucznia++;
 	}
 	plik.close();
 	sortuj(ilu, tab);
