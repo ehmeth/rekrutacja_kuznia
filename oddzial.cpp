@@ -18,6 +18,8 @@ bool oddzial::dodajUcznia (Uczen kandydat)
 
 bool oddzial::wypiszListeUczniow(std::string oddzial_csv)
 {
+	// TODO: dlaczego tutaj jest uzyte :: ? Do ktorego obiektu klasy oddzial odnosi sie taki zapis? 
+	// TODO: Po co tej funkcji potrzebne sa jakiekolwiek argumenty?
 	oddzial::segregujUczniow(oddzial::liczba_uczniow_w_oddziale,oddzial::lista_uczniow_w_oddziale);
 
     ofstream outfile (oddzial_csv.c_str());

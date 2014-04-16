@@ -1,7 +1,9 @@
-#ifndef _oddzial_h
-#define _oddzial_h
+#ifndef _ODDZIAL_H
+#define _ODDZIAL_H
+
 #include <string>
 #include "Uczen.h"
+
 class oddzial
 {
 	public:
@@ -22,10 +24,10 @@ class oddzial
 	true - udalo sie wyeksportowac dane do pliku zewnetrzego,
 	false - nie udalo sie
 */
+	bool wypiszListeUczniow (std::string oddzial_csv);
 
 	oddzial() 
 	:liczba_uczniow_w_oddziale(0) {};
-	bool wypiszListeUczniow (std::string oddzial_csv);
 
 	private:
 	static const int  max_licz_uczniow = 22;
@@ -37,4 +39,5 @@ class oddzial
 
 
 };
-#endif
+
+#endif // _ODDZIAL_H

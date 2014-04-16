@@ -1,5 +1,6 @@
-#ifndef _Nabor_h
-#define _Nabor_h
+#ifndef _NABOR_H
+#define _NABOR_H
+
 #include "Uczen.h"
 #include "oddzial.h"
 #include "sekretariat.h"
@@ -25,4 +26,5 @@ class Nabor
 	bool wpis_z_pliku(std::string sciezka, bool tryb);
 	void sortuj(int ilosc, Uczen tab[]);
 };
-#endif
+
+#endif // _NABOR_H

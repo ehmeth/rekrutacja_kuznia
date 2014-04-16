@@ -1,5 +1,5 @@
-#ifndef _sekreteriat_h_
-#define _sekreteriat_h_
+#ifndef _SEKRETERIAT_H_
+#define _SEKRETERIAT_H_
 
 #include <string>
 
@@ -22,4 +22,6 @@ class sekretariat
 	sekretariat(std::string plik_csv);
 	
 };
-#endif
+
+
+#endif // _SEKRETERIAT_H_

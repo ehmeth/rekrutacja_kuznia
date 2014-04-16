@@ -14,7 +14,7 @@ class Uczen
 		std::string nazwisko;
 		std::string imie;
 		int punkty;
-		wybor wyborUcznia[3];
+		wybor wyborUcznia[3];	// TODO: magic number
 		jezyk wyborJezyka;
 
 
@@ -29,7 +29,7 @@ class Uczen
 			Wartosc zwracana: jezyka ucznia - 0 dla angielski, 1 dla niemiecki; */
 		jezyk podaj_jezyk();
 			/* metoda podaj_wybor -
-			Argumenty wejscia: int ktory - przyjmuje wartosc wyboru oddzialu, kt?ry preferuje uczen.
+			Argumenty wejscia: int ktory - przyjmuje wartosc wyboru oddzialu, ktory preferuje uczen.
 			Wartosc zwracana: zwraca wybor odzialu preferowany przez ucznia; */
 		wybor podaj_wybor(int ktoryWybor);
 
