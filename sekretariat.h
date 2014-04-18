@@ -1,7 +1,8 @@
-#ifndef _SEKRETERIAT_H_
-#define _SEKRETERIAT_H_
+#ifndef _SEKRETARIAT_H_
+#define _SEKRETARIAT_H_
 
 #include <string>
+#include <iostream>
 
 class sekretariat
 {
@@ -24,4 +25,4 @@ class sekretariat
 };
 
 
-#endif // _SEKRETERIAT_H_
+#endif // _SEKRETARIAT_H_

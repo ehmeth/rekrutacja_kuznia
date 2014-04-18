@@ -26,6 +26,10 @@ class oddzial
 */
 	bool wypiszListeUczniow (std::string oddzial_csv);
 
+	//TODO dodaæ komentarz
+
+	int oddzial::podajLiczbeUczniow();
+
 	oddzial() 
 	:liczba_uczniow_w_oddziale(0) {};
 

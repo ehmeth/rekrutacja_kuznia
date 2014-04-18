@@ -51,3 +51,9 @@ void oddzial::segregujUczniow()
 		}
 	}
 }
+
+int oddzial::podajLiczbeUczniow()
+{
+	return liczba_uczniow_w_oddziale;
+
+}

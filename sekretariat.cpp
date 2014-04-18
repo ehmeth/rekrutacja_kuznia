@@ -1,6 +1,8 @@
 // NIE DOKONCZONY
 
 #include "Nabor.h"
+#include "sekretariat.h"
+#include <iostream>
 
 
 // TODO: dlaczego funkcja start jest tak cholernie dluga? 
@@ -13,8 +15,7 @@ bool sekretariat::start (std::string plik_csv)
 	oddzial klasa[Uczen::MAX_WYBOR]; // TODO: slowo kluczowe "klasa" jest niefortunne
 	enum przypisanie_kandydata { blad = 0, PIERWSZY_W, DRUGI_W, TRZECI_W, WYBOR_PO_JEZYKU, WYBOR_POZA_PREFERENCJA};
 	przypisanie_kandydata kandydatDodany = blad;
-	//bool kandydatDodany = false;
-	//bool kandydatDodanyPoJezyku = false;
+	
 
 	for (int i = 0; i < nowyNabor.ilosc(); i++) // przypisanie uczniow do oddzialow
 	{
@@ -27,7 +28,7 @@ bool sekretariat::start (std::string plik_csv)
 				// odpPZ: 
 				{
 					kandydatDodany = WYBOR_PO_JEZYKU; // kandydat dodany wg jezyka
-					break;
+					
 				}
 				kandydatDodany = blad;
 			}
@@ -49,7 +50,7 @@ bool sekretariat::start (std::string plik_csv)
 						
 						break;
 					}
-					kandydatDodany == blad;
+					kandydatDodany = blad;
 				}
 				if (kandydatDodany == blad)
 				// nieudane przypisanie po preferencjach, przypisanie do pierwszego wolnego miejsca
@@ -60,24 +61,32 @@ bool sekretariat::start (std::string plik_csv)
 
 					for (int j = 0; j < kandydat.MAX_WYBOR; j++) // j = numery wszystkich oddzialow
 					{
+						int minLiczbaUczniow = 0;
+						if (minLiczbaUczniow > klasa[j].podajLiczbeUczniow())
+						{
+							int minLiczbaUczniow = klasa[j].podajLiczbeUczniow();
+						}
+						
 						if (klasa[j].dodajUcznia(kandydat))
 						{
 							kandydatDodany = WYBOR_POZA_PREFERENCJA; // kandydat dodany wg swoich preferencji
 							break;
 						}
 					}
-				}
-				//dodaje ucznia do pierwszej klasy w ktorej sa wolne miejsca
+				}			
 			}
+			//std::cout << kandydatDodany << kandydat.podaj_nazwisko();
+			
 		}
 	} // for (int i = 0; i < nowyNabor.ilosc(); i++)
-
+	
 	klasa[kandydat.A].wypiszListeUczniow("klasaA.csv"); // TODO: nie sprawdzamy, co zwrocila funkcja wypiszListeUczniow
 	klasa[kandydat.B].wypiszListeUczniow("klasaB.csv"); // TODO: Uczen::B ?
 	klasa[kandydat.C].wypiszListeUczniow("klasaC.csv");
 	klasa[kandydat.D].wypiszListeUczniow("klasaD.csv");
 	klasa[kandydat.E].wypiszListeUczniow("klasaE.csv");
 	klasa[kandydat.F].wypiszListeUczniow("klasaF.csv");
+	//getchar();
 
 	if (kandydatDodany==blad)
 	{
