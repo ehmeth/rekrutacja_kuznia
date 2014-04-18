@@ -6,7 +6,7 @@
 // TODO: dlaczego funkcja start jest tak cholernie dluga?
 bool sekretariat::start (std::string plik_csv)
 {
-	Nabor nowyNabor(plik_csv,6,22);	// TODO: nie robimy magic numbers
+	Nabor nowyNabor(plik_csv);	// TODO: nie robimy magic numbers
 	Uczen kandydat;
 	oddzial klasa[Uczen::MAX_WYBOR]; // TODO: slowo kluczowe "klasa" jest niefortunne
 	bool kandydatDodany = false;
