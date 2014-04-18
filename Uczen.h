@@ -14,7 +14,8 @@ class Uczen
 		std::string nazwisko;
 		std::string imie;
 		int punkty;
-		wybor wyborUcznia[3];	// TODO: magic number
+		static const int liczba_wyborow = 3;
+		wybor wyborUcznia[liczba_wyborow];	// TODO: magic number
 		jezyk wyborJezyka;
 
 

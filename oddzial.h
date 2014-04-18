@@ -34,7 +34,7 @@ class oddzial
 	int liczba_uczniow_w_oddziale;
 	Uczen lista_uczniow_w_oddziale[max_licz_uczniow];
 
-	void segregujUczniow (int liczba_uczniow, Uczen tab[]);
+	void segregujUczniow ();
 
 
 

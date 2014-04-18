@@ -11,23 +11,24 @@ bool oddzial::dodajUcznia(Uczen kandydat)
 		liczba_uczniow_w_oddziale++;
 		return true;
 	}
-	// cout << "Error -- dodajUcznia" << endl;
+	
 	return false;
 
 }
 
 bool oddzial::wypiszListeUczniow(std::string oddzial_csv)
 {
-	// TODO: dlaczego tutaj jest uzyte :: ? Do ktorego obiektu klasy oddzial odnosi sie taki zapis? 
-	// TODO: Po co tej funkcji potrzebne sa jakiekolwiek argumenty?
-	oddzial::segregujUczniow(oddzial::liczba_uczniow_w_oddziale, oddzial::lista_uczniow_w_oddziale);
+	// TODO: dlaczego tutaj jest uzyte :: ? Do ktorego obiektu klasy oddzial odnosi sie taki zapis? odp: usuniêto ::
+	// TODO: Po co tej funkcji potrzebne sa jakiekolwiek argumenty?   
+	//  odp: argumenty niepotrzebne,nale¿¹ do klasy uczeñ wiêc metoda "widzi" je
+	segregujUczniow();
 
 	ofstream outfile(oddzial_csv.c_str());
 	if (outfile.is_open())
 	{
-		for (int i = 0; i < oddzial::liczba_uczniow_w_oddziale; i++)
+		for (int i = 0; i < liczba_uczniow_w_oddziale; i++)
 		{
-			outfile << oddzial::lista_uczniow_w_oddziale[i].podaj_nazwisko() << '\n';
+			outfile << lista_uczniow_w_oddziale[i].podaj_nazwisko() << '\n';
 		}
 		outfile.close();
 		return true;
@@ -35,17 +36,17 @@ bool oddzial::wypiszListeUczniow(std::string oddzial_csv)
 	return false;
 }
 
-void oddzial::segregujUczniow(int liczba_uczniow, Uczen tab[])
+void oddzial::segregujUczniow()
 
 {
 
-	for (int i = liczba_uczniow - 1; i >= 0; i--)
-		//for (int i = 0; i < liczba_uczniow; i++)
+	for (int i = liczba_uczniow_w_oddziale - 1; i >= 0; i--)
+		
 	for (int l = 0; l<i; l++)
 	{
-		if (tab[l].podaj_nazwisko() > tab[l + 1].podaj_nazwisko())
+		if (lista_uczniow_w_oddziale[l].podaj_nazwisko() > lista_uczniow_w_oddziale[l + 1].podaj_nazwisko())
 		{
-			std::swap(tab[l], tab[l + 1]);
+			std::swap(lista_uczniow_w_oddziale[l], lista_uczniow_w_oddziale[l + 1]);
 
 		}
 	}
