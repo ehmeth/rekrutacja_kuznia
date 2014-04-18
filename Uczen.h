@@ -35,6 +35,6 @@ class Uczen
 		wybor podaj_wybor(int ktoryWybor);
 
 		Uczen();
-		Uczen(std::string aNazwisko,std::string aImie,int aPunkty,jezyk aJezyk,wybor aWybor1,wybor aWybor2,wybor aWybor3); //konstruktor
+		Uczen(std::string aImie, std::string aNazwisko, int aPunkty, jezyk aJezyk, wybor aWybor1, wybor aWybor2, wybor aWybor3); //konstruktor
 };
 #endif

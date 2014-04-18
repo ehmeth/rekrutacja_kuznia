@@ -15,12 +15,12 @@ Uczen::Uczen()
 	}
 
 
-Uczen::Uczen(std::string aNazwisko,std::string aImie,int aPunkty,
+Uczen::Uczen(std::string aImie, std::string aNazwisko, int aPunkty,
 			jezyk aJezyk,wybor aWybor1,wybor aWybor2,wybor aWybor3)
 
 	{
-		nazwisko = aNazwisko;
 		imie = aImie;
+		nazwisko = aNazwisko;
 		punkty = aPunkty;
 		wyborJezyka = aJezyk;
 		wyborUcznia[0] = aWybor1;
@@ -30,7 +30,7 @@ Uczen::Uczen(std::string aNazwisko,std::string aImie,int aPunkty,
 
 std::string Uczen::podaj_nazwisko()
 {
-	return imie + " " + nazwisko;	// TODO: dlaczego imie jako pierwsze, skoto ma segregowac po nazwiskach? 
+	return nazwisko + " " + imie ;	// TODO: dlaczego imie jako pierwsze, skoto ma segregowac po nazwiskach? 
 	// odp: zostanie poprawione jak znajdziemy pierwotny b³¹d
 }
 
