@@ -9,12 +9,12 @@ class Uczen
 	public:
 	enum jezyk {angielski = 0, niemiecki, DUNNO};
 	enum wybor {UNINITIALIZED=-1, A = 0,B,C,D,E,F,MAX_WYBOR};
+	static const int liczba_wyborow = 3;
 
 	private:
 		std::string nazwisko;
 		std::string imie;
 		int punkty;
-		static const int liczba_wyborow = 3;
 		wybor wyborUcznia[liczba_wyborow];	// TODO: magic number
 		jezyk wyborJezyka;
 

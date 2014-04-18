@@ -3,35 +3,55 @@
 #include "Nabor.h"
 
 
-// TODO: dlaczego funkcja start jest tak cholernie dluga?
+// TODO: dlaczego funkcja start jest tak cholernie dluga? 
+//odpPZ: moze by ja podzielic na dodajPoJezyku, dodajPoWyborze, dodajPozostalych
+
 bool sekretariat::start (std::string plik_csv)
 {
 	Nabor nowyNabor(plik_csv);	// TODO: nie robimy magic numbers
 	Uczen kandydat;
 	oddzial klasa[Uczen::MAX_WYBOR]; // TODO: slowo kluczowe "klasa" jest niefortunne
-	bool kandydatDodany = false;
+	enum przypisanie_kandydata { blad = 0, PIERWSZY_W, DRUGI_W, TRZECI_W, WYBOR_PO_JEZYKU, WYBOR_POZA_PREFERENCJA};
+	przypisanie_kandydata kandydatDodany = blad;
+	//bool kandydatDodany = false;
+	//bool kandydatDodanyPoJezyku = false;
 
 	for (int i = 0; i < nowyNabor.ilosc(); i++) // przypisanie uczniow do oddzialow
 	{
+		kandydatDodany = blad;
 		if (nowyNabor.podaj_ucznia(i, &kandydat))
 		{
 			if (kandydat.podaj_jezyk() == kandydat.niemiecki) // dodawanie kandydat z jez. niemieckim do klasy C
 			{
-				klasa[kandydat.C].dodajUcznia(kandydat); // TODO: nie sprawdzamy, co zwrocila funkcja dodajUcznia
+				if (klasa[kandydat.C].dodajUcznia(kandydat)); // TODO: nie sprawdzamy, co zwrocila funkcja dodajUcznia  
+				// odpPZ: 
+				{
+					kandydatDodany = WYBOR_PO_JEZYKU; // kandydat dodany wg jezyka
+					break;
+				}
+				kandydatDodany = blad;
 			}
 			else // dodawanie po preferencjach pozostalych kandydatow do pozostalych klas
 			{
 
-				for (int j = 0; j < 3; j++) // TODO: magic number; j = preferencje kandydata, sa 3. 
+				for (int j = 0; j < Uczen::liczba_wyborow; j++) // TODO: magic number; j = preferencje kandydata, sa 3.odpPZ:poprawiono
 				{
 					if(klasa[kandydat.podaj_wybor(j)].dodajUcznia(kandydat))
 					{
-						kandydatDodany = true; // kandydat dodany wg swoich preferencji
+						switch (j)
+						{
+						
+						case 0: kandydatDodany = PIERWSZY_W; break;   // kandydat dodany wg swoich preferencji
+						case 1: kandydatDodany = DRUGI_W; break;
+						case 2: kandydatDodany = TRZECI_W; break;
+						default: kandydatDodany = blad;
+						}
+						
 						break;
 					}
-
+					kandydatDodany == blad;
 				}
-				if (kandydatDodany == false)
+				if (kandydatDodany == blad)
 				// nieudane przypisanie po preferencjach, przypisanie do pierwszego wolnego miejsca
 				{
 					// TODO: przy takim algorytmie klasa A bedzie najbardziej obciazona i w niej pierwszej zabraknie miejsc.
@@ -42,7 +62,7 @@ bool sekretariat::start (std::string plik_csv)
 					{
 						if (klasa[j].dodajUcznia(kandydat))
 						{
-							kandydatDodany = true; // kandydat dodany wg swoich preferencji
+							kandydatDodany = WYBOR_POZA_PREFERENCJA; // kandydat dodany wg swoich preferencji
 							break;
 						}
 					}
@@ -59,7 +79,12 @@ bool sekretariat::start (std::string plik_csv)
 	klasa[kandydat.E].wypiszListeUczniow("klasaE.csv");
 	klasa[kandydat.F].wypiszListeUczniow("klasaF.csv");
 
-	return kandydatDodany; // TODO: co TAK NAPRAWDE zostanie tutaj zwrocone i dlaczego?
+	if (kandydatDodany==blad)
+	{
+		return false;
+	}
+	else return true;
+		// TODO: co TAK NAPRAWDE zostanie tutaj zwrocone i dlaczego?
 }
 
 
