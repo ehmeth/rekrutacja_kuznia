@@ -75,7 +75,7 @@ bool Nabor::pobranieDanych(const string sciezkaDoPliku)
 	Uczen::wybor wybor2Ucznia;
 	Uczen::wybor wybor3Ucznia;
 	
-	const int dodPunktyNiem = 101, maxKomorek = 6, ilInformacjiWPliku = 7;
+	const int dodPunktyNiem = 101, maxKomorek = 12, ilInformacjiWPliku = 13;
 	int indeksInfZPliku = 0, punktyUcznia = 0; 
 
 	string sZawartoscDanych, temp[ilInformacjiWPliku];
@@ -88,18 +88,6 @@ bool Nabor::pobranieDanych(const string sciezkaDoPliku)
 		cout << "Nie udalo sie otworzyc pliku -- Nabor::wpis_z_pliku" << endl;
 		return false;
 	}
-
-			while (getline(plik, sZawartoscDanych))//Odczytanie ilosci uczniow w pliku
-		{
-			ileWersow++;
-		}
-		plik.clear(); //Wyczyszczenie bufora i ustawienie wskaŸnika wen¹trz pliku na jego pocz¹tek 
-		plik.seekg(0, plik.beg);
-
-
-	tabUczniow = new Uczen[ileWersow];//Tworzenie tablicy od ilosci uczniow z pliku
-	ileWersow = 0;
-
 	while (getline(plik, sZawartoscDanych))//Odczytanie informacji z pliku i zapisanie ich w kolejnych miejscach tabeli
 	{
 		indeksInfZPliku = 0;
@@ -158,16 +146,16 @@ bool Nabor::pobranieDanych(const string sciezkaDoPliku)
 		wybor1Ucznia = strDoWybor(temp[wybor_1]);                               
 		wybor2Ucznia = strDoWybor(temp[wybor_2]);
 		wybor3Ucznia = strDoWybor(temp[wybor_3]);
-		tabUczniow[ileWersow] = Uczen(temp[ImieEnum], temp[NazwiskoEnum], punktyUcznia, jezykWPodstawowce, wybor1Ucznia, wybor2Ucznia, wybor3Ucznia);
-																								//stworzenie ucznia i wpisanie go do tablicy
-		ileWersow++;
+		tabUczniow.push_back(Uczen(temp[ImieEnum], temp[NazwiskoEnum], punktyUcznia, jezykWPodstawowce, wybor1Ucznia, wybor2Ucznia, wybor3Ucznia));
+	               																				//stworzenie ucznia i wpisanie go do tablicy
 	}
 	plik.close();
+	ileWersow = tabUczniow.size();
 	sortowanieMalejace(tabUczniow);//Sortowanie malejace otrzymanej tabeli
 	return true;
 }
 
-void Nabor::sortowanieMalejace(Uczen tabUczniow[])
+void Nabor::sortowanieMalejace(std::vector <Uczen> tabUczniow)
 {
 	for (int i = ileWersow - 1; i >= 0; i--)
 	for (int x = 0; x < i; x++)
