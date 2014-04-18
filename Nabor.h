@@ -8,23 +8,25 @@
 class Nabor
 {
 	public:
+		enum indeksyDanychPlik{ ImieEnum = 0, NazwiskoEnum, punktyEnum,
+		wybor_1, wybor_2, wybor_3, jezykEnum };
 
 	int ilosc();// Zwraca ilosc uczniow w tabelii
 
-	bool podaj_ucznia(int ktory, Uczen * kto);//Zmienia wartosci zmiennej kto na wartosci ucznia z tabeli o indeksie "ktory"
+	bool podaj_ucznia( int numerUcznia, Uczen * pUczen);
+												//Pobiera indeks ucznia i wskaünik na zmiennπ typu Uczen
 												// zwrafa false w przypadku braku danego wiersza w tabeli i true gdy iwersz istnieje
-	Nabor(std::string sciezka_do_pliku);//Pobiera sciezke do pliku i tworzy tabele uczniow posortowana wedlug punktow;
-	Nabor(std::string sciezka_do_pliku, unsigned int liczba_oddzialow, unsigned int liczba_uczniow);//osoby z niemieckim jako podstawowym umieszczane sa na poczatku tabeli
-	~Nabor() { delete [] tab; }
+	Nabor(std::string sciezkaDoPliku);//Pobiera sciezke do pliku i tworzy tabele uczniow posortowana wedlug punktow;
+	                                //osoby z niemieckim jako podstawowym umieszczane sa na poczatku tabeli
+	~Nabor() { delete [] tabUczniow; }
 
 	private:
-	Uczen *tab;
-	int ilu;
+	Uczen *tabUczniow;
+	int ileWersow;
 
-	Uczen::wybor str_to_wybor(std::string tab);
-	Uczen::jezyk str_to_jezyk(std::string tab);
-	bool wpis_z_pliku(std::string sciezka, bool tryb);
-	void sortuj(int ilosc, Uczen tab[]);
+	Uczen::wybor strDoWybor(std::string tabUczniow);
+	Uczen::jezyk strDoJezyk(std::string tabUczniow);
+	bool pobranieDanych(std::string sciezkaDoPliku);
+	void sortowanieMalejace( Uczen tabUczniow[]);
 };
-
 #endif // _NABOR_H
