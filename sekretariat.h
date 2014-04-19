@@ -16,6 +16,7 @@ class sekretariat
 	*/	
 		
 		bool start (std::string plik_csv);
+		enum przypisanie_kandydata { BRAK = 0, PIERWSZY_W, DRUGI_W, TRZECI_W, WYBOR_PO_JEZYKU, WYBOR_POZA_PREFERENCJA };
 		bool stworzOddzialy (); 
 	////dodane przez marka
 	//konstruktor:

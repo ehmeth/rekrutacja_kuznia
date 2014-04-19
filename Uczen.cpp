@@ -1,4 +1,6 @@
 #include "Uczen.h"
+#include "sekretariat.h"
+
 using namespace std;
 
 
@@ -12,11 +14,12 @@ Uczen::Uczen()
 		wyborUcznia[0] = UNINITIALIZED;
 		wyborUcznia[1] = UNINITIALIZED;
 		wyborUcznia[2] = UNINITIALIZED;
+		//sposobPrzydzialu = BRAK;
 	}
 
 
 Uczen::Uczen(std::string aImie, std::string aNazwisko, int aPunkty,
-			jezyk aJezyk,wybor aWybor1,wybor aWybor2,wybor aWybor3)
+	jezyk aJezyk, wybor aWybor1, wybor aWybor2, wybor aWybor3)// sekretariat::przypisanie_kandydata asposobPrzydzialu
 
 	{
 		imie = aImie;
@@ -26,12 +29,13 @@ Uczen::Uczen(std::string aImie, std::string aNazwisko, int aPunkty,
 		wyborUcznia[0] = aWybor1;
 		wyborUcznia[1] = aWybor2;
 		wyborUcznia[2] = aWybor3;
+		//sposobPrzydzialu = asposobPrzydzialu;
 	}
 
 std::string Uczen::podaj_nazwisko()
 {
 	return nazwisko + " " + imie ;	// TODO: dlaczego imie jako pierwsze, skoto ma segregowac po nazwiskach? 
-	// odp: zostanie poprawione jak znajdziemy pierwotny b³¹d
+	// odpPZ: poprawione
 }
 
 int Uczen::podaj_liczba_punktow()
@@ -46,3 +50,8 @@ Uczen::jezyk Uczen::podaj_jezyk()
 {
 	return wyborJezyka;
 }
+//bool Uczen::zapisz_sposob(sekretariat::przypisanie_kandydata z_kandydat)
+//{
+//	sposobPrzydzialu = z_kandydat;
+//}
+

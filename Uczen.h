@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include "sekretariat.h"
 
 class Uczen
 {
@@ -10,6 +11,8 @@ class Uczen
 	enum jezyk {angielski = 0, niemiecki, DUNNO};
 	enum wybor {UNINITIALIZED=-1, A = 0,B,C,D,E,F,MAX_WYBOR};
 	static const int liczba_wyborow = 3;
+	//enum przypisanie_kandydata { blad = 0, PIERWSZ_W, DRUGI_W, TRZECI_W, WYBOR_PO_JEZYKU, WYBOR_POZA_PREFERENCJA };
+	//enum sposob { ublad = 0, uPIERWSZ_W, uDRUGI_W, uTRZECI_W, uWYBOR_PO_JEZYKU, aWYBOR_POZA_PREFERENCJA };
 
 	private:
 		std::string nazwisko;
@@ -17,6 +20,8 @@ class Uczen
 		int punkty;
 		wybor wyborUcznia[liczba_wyborow];	// TODO: magic number
 		jezyk wyborJezyka;
+		sekretariat::przypisanie_kandydata sposobPrzydzialu;
+
 
 
 
@@ -33,8 +38,15 @@ class Uczen
 			Argumenty wejscia: int ktory - przyjmuje wartosc wyboru oddzialu, ktory preferuje uczen.
 			Wartosc zwracana: zwraca wybor odzialu preferowany przez ucznia; */
 		wybor podaj_wybor(int ktoryWybor);
+		/* metoda podaj_wybor -  TODO uzupelnic
+		Argumenty wejscia: .
+		Wartosc zwracana:  */
+		//bool Uczen::zapisz_sposob(sekretariat::przypisanie_kandydata z_kandydat);
+
 
 		Uczen();
-		Uczen(std::string aImie, std::string aNazwisko, int aPunkty, jezyk aJezyk, wybor aWybor1, wybor aWybor2, wybor aWybor3); //konstruktor
+		Uczen(std::string aImie, std::string aNazwisko, int aPunkty, 
+			jezyk aJezyk, wybor aWybor1, wybor aWybor2, wybor aWybor3);
+		// , sekretariat::przypisanie_kandydata asposobPrzydzialukonstruktor
 };
 #endif

@@ -28,7 +28,7 @@ bool oddzial::wypiszListeUczniow(std::string oddzial_csv)
 	{
 		for (int i = 0; i < liczba_uczniow_w_oddziale; i++)
 		{
-			outfile << lista_uczniow_w_oddziale[i].podaj_nazwisko() << '\n';
+			outfile << lista_uczniow_w_oddziale[i].podaj_nazwisko() << '\n'; //<< lista_uczniow_w_oddziale[i].podaj_sposob()
 		}
 		outfile.close();
 		return true;
@@ -57,3 +57,5 @@ int oddzial::podajLiczbeUczniow()
 	return liczba_uczniow_w_oddziale;
 
 }
+
+//string oddzial::podaj_sposob()

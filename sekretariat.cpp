@@ -13,24 +13,24 @@ bool sekretariat::start (std::string plik_csv)
 	Nabor nowyNabor(plik_csv);	// TODO: nie robimy magic numbers
 	Uczen kandydat;
 	oddzial klasa[Uczen::MAX_WYBOR]; // TODO: slowo kluczowe "klasa" jest niefortunne
-	enum przypisanie_kandydata { blad = 0, PIERWSZY_W, DRUGI_W, TRZECI_W, WYBOR_PO_JEZYKU, WYBOR_POZA_PREFERENCJA};
-	przypisanie_kandydata kandydatDodany = blad;
+	
+	przypisanie_kandydata kandydatDodany = BRAK;
 	
 
 	for (int i = 0; i < nowyNabor.ilosc(); i++) // przypisanie uczniow do oddzialow
 	{
-		kandydatDodany = blad;
+		kandydatDodany = BRAK;
 		if (nowyNabor.podaj_ucznia(i, &kandydat))
 		{
 			if (kandydat.podaj_jezyk() == kandydat.niemiecki) // dodawanie kandydat z jez. niemieckim do klasy C
 			{
-				if (klasa[kandydat.C].dodajUcznia(kandydat)); // TODO: nie sprawdzamy, co zwrocila funkcja dodajUcznia  
+				if (klasa[kandydat.C].dodajUcznia(kandydat)) // TODO: nie sprawdzamy, co zwrocila funkcja dodajUcznia  
 				// odpPZ: 
 				{
 					kandydatDodany = WYBOR_PO_JEZYKU; // kandydat dodany wg jezyka
 					
 				}
-				kandydatDodany = blad;
+				kandydatDodany = BRAK;
 			}
 			else // dodawanie po preferencjach pozostalych kandydatow do pozostalych klas
 			{
@@ -45,14 +45,14 @@ bool sekretariat::start (std::string plik_csv)
 						case 0: kandydatDodany = PIERWSZY_W; break;   // kandydat dodany wg swoich preferencji
 						case 1: kandydatDodany = DRUGI_W; break;
 						case 2: kandydatDodany = TRZECI_W; break;
-						default: kandydatDodany = blad;
+						default: kandydatDodany = BRAK;
 						}
 						
 						break;
 					}
-					kandydatDodany = blad;
+					kandydatDodany = BRAK;
 				}
-				if (kandydatDodany == blad)
+				if (kandydatDodany == BRAK)
 				// nieudane przypisanie po preferencjach, przypisanie do pierwszego wolnego miejsca
 				{
 					// TODO: przy takim algorytmie klasa A bedzie najbardziej obciazona i w niej pierwszej zabraknie miejsc.
@@ -75,6 +75,7 @@ bool sekretariat::start (std::string plik_csv)
 					}
 				}			
 			}
+			// kandydat.zapiszSposob(kandydatDodany)
 			//std::cout << kandydatDodany << kandydat.podaj_nazwisko();
 			
 		}
@@ -88,7 +89,7 @@ bool sekretariat::start (std::string plik_csv)
 	klasa[kandydat.F].wypiszListeUczniow("klasaF.csv");
 	//getchar();
 
-	if (kandydatDodany==blad)
+	if (kandydatDodany == BRAK)
 	{
 		return false;
 	}

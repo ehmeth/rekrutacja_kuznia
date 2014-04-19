@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include "Nabor.h"
 #include "Uczen.h"
+#include "sekretariat.h"
 #include <sstream>
 #include <stdlib.h>
 #include <string>
@@ -74,6 +75,7 @@ bool Nabor::pobranieDanych(const string sciezkaDoPliku)
 	Uczen::wybor wybor1Ucznia;
 	Uczen::wybor wybor2Ucznia;
 	Uczen::wybor wybor3Ucznia;
+	//sekretariat::przypisanie_kandydata sposobPrzyp = BRAK;
 	
 	const int dodPunktyNiem = 101, maxKomorek = 12, ilInformacjiWPliku = 13;
 	int indeksInfZPliku = 0, punktyUcznia = 0; 
@@ -146,8 +148,8 @@ bool Nabor::pobranieDanych(const string sciezkaDoPliku)
 		wybor1Ucznia = strDoWybor(temp[wybor_1]);                               
 		wybor2Ucznia = strDoWybor(temp[wybor_2]);
 		wybor3Ucznia = strDoWybor(temp[wybor_3]);
-		tabUczniow.push_back(Uczen(temp[ImieEnum], temp[NazwiskoEnum], punktyUcznia, jezykWPodstawowce, wybor1Ucznia, wybor2Ucznia, wybor3Ucznia));
-	               																				//stworzenie ucznia i wpisanie go do tablicy
+		tabUczniow.push_back(Uczen(temp[ImieEnum], temp[NazwiskoEnum], punktyUcznia, jezykWPodstawowce,
+			wybor1Ucznia, wybor2Ucznia, wybor3Ucznia)); // dodac arg sposobPrzyp
 	}
 	plik.close();
 	ileWersow = tabUczniow.size();
