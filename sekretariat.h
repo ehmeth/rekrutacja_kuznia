@@ -16,12 +16,12 @@ public:
 	*/	
 	bool start (std::string plik_csv);
 	
-	/*	stworzOddzialy - funkcja 
-	Arg.we:
+	/*	stworzOddzialy - funkcja tworzy pliki wynikowe z tablicy t_oddzialy[]
+	Arg.we: brak
 
 	Zwracane:
-	true  - 
-	false - 
+	true  - jesli wszystkie oddzialy sa dodane prawidlowo
+	false - jesli chocby jeden z oddzialow nie zapisano
 	*/
 	bool stworzOddzialy (); 
 	
