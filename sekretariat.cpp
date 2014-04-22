@@ -1,6 +1,7 @@
 // NIE DOKONCZONY
 
 #include "Nabor.h"
+#include "Uczen.h"
 
 
 // TODO: dlaczego funkcja start jest tak cholernie dluga?
@@ -8,7 +9,8 @@ bool sekretariat::start (std::string plik_csv)
 {
 	Nabor nowyNabor(plik_csv);	// TODO: nie robimy magic numbers
 	Uczen kandydat;
-	oddzial klasa[Uczen::MAX_WYBOR]; // TODO: slowo kluczowe "klasa" jest niefortunne
+	//przenosze tablice klasa[] do sekcji private klasy sekretariat.h z nowa nazwa t_oddzial, 
+	//zeby tablica t_oddzialy byla dostepna dla wszystkich metod klasy sekretariat.h	// TODO: slowo kluczowe "klasa" jest niefortunne
 	bool kandydatDodany = false;
 
 	for (int i = 0; i < nowyNabor.ilosc(); i++) // przypisanie uczniow do oddzialow
@@ -17,14 +19,14 @@ bool sekretariat::start (std::string plik_csv)
 		{
 			if (kandydat.podaj_jezyk() == kandydat.niemiecki) // dodawanie kandydat z jez. niemieckim do klasy C
 			{
-				klasa[kandydat.C].dodajUcznia(kandydat); // TODO: nie sprawdzamy, co zwrocila funkcja dodajUcznia
+				t_oddzial[kandydat.C].dodajUcznia(kandydat); // TODO: nie sprawdzamy, co zwrocila funkcja dodajUcznia
 			}
 			else // dodawanie po preferencjach pozostalych kandydatow do pozostalych klas
 			{
 
 				for (int j = 0; j < 3; j++) // TODO: magic number; j = preferencje kandydata, sa 3. 
 				{
-					if(klasa[kandydat.podaj_wybor(j)].dodajUcznia(kandydat))
+					if (t_oddzial[kandydat.podaj_wybor(j)].dodajUcznia(kandydat))
 					{
 						kandydatDodany = true; // kandydat dodany wg swoich preferencji
 						break;
@@ -40,7 +42,7 @@ bool sekretariat::start (std::string plik_csv)
 
 					for (int j = 0; j < kandydat.MAX_WYBOR; j++) // j = numery wszystkich oddzialow
 					{
-						if (klasa[j].dodajUcznia(kandydat))
+						if (t_oddzial[j].dodajUcznia(kandydat))
 						{
 							kandydatDodany = true; // kandydat dodany wg swoich preferencji
 							break;
@@ -52,13 +54,7 @@ bool sekretariat::start (std::string plik_csv)
 		}
 	} // for (int i = 0; i < nowyNabor.ilosc(); i++)
 
-	klasa[kandydat.A].wypiszListeUczniow("klasaA.csv"); // TODO: nie sprawdzamy, co zwrocila funkcja wypiszListeUczniow
-	klasa[kandydat.B].wypiszListeUczniow("klasaB.csv"); // TODO: Uczen::B ?
-	klasa[kandydat.C].wypiszListeUczniow("klasaC.csv");
-	klasa[kandydat.D].wypiszListeUczniow("klasaD.csv");
-	klasa[kandydat.E].wypiszListeUczniow("klasaE.csv");
-	klasa[kandydat.F].wypiszListeUczniow("klasaF.csv");
-
+	//przenosze zapisanie wszystkich oddzialow do metody klasy sekretariat::stworzOddzialy()
 	return kandydatDodany; // TODO: co TAK NAPRAWDE zostanie tutaj zwrocone i dlaczego?
 }
 
@@ -66,12 +62,28 @@ bool sekretariat::start (std::string plik_csv)
 // TODO: po co ta funkcja?
 bool sekretariat::stworzOddzialy ()
 {
-	return false;
+	bool czyZapisane;
+
+	if (t_oddzial[Uczen::A].wypiszListeUczniow("klasaA.csv"))
+	{
+		czyZapisane = true;
+	}
+	else
+	{
+		czyZapisane = false;
+		cout << "ERROR w metodzie sekretariat::stworzOddzialy ();\nNie zapisano do pliku oddzialu A\n";
+	}
+	 // TODO: nie sprawdzamy, co zwrocila funkcja wypiszListeUczniow
+	t_oddzial[Uczen::B].wypiszListeUczniow("klasaB.csv"); // TODO: Uczen::B ?
+	t_oddzial[Uczen::C].wypiszListeUczniow("klasaC.csv");
+	t_oddzial[Uczen::D].wypiszListeUczniow("klasaD.csv");
+	t_oddzial[Uczen::E].wypiszListeUczniow("klasaE.csv");
+	t_oddzial[Uczen::F].wypiszListeUczniow("klasaF.csv");
+
+	return czyZapisane;
 
 }
 
-	////dodane przez marka
-	//konstruktor:
 
 sekretariat::sekretariat(std::string plik_csv)
 {
