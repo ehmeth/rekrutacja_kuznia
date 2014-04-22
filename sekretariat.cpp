@@ -2,6 +2,7 @@
 
 #include "Nabor.h"
 #include "Uczen.h"
+#include <string>
 
 
 // TODO: dlaczego funkcja start jest tak cholernie dluga?
@@ -61,24 +62,32 @@ bool sekretariat::start (std::string plik_csv)
 
 // TODO: po co ta funkcja?
 bool sekretariat::stworzOddzialy ()
-{
-	bool czyZapisane;
+{	 // TODO: nie sprawdzamy, co zwrocila funkcja wypiszListeUczniow
 
-	if (t_oddzial[Uczen::A].wypiszListeUczniow("klasaA.csv"))
+	//t_zapisOddzialu[] w tablicy znajduj¹ siê wartosci true gdy udalosie zapisac
+	bool t_zapisOddzialu[Uczen::wybor::MAX_WYBOR] = { false };
+
+	for (int j = 0; j < Uczen::wybor::MAX_WYBOR; j++)
 	{
-		czyZapisane = true;
+		if (t_oddzial[j].wypiszListeUczniow("klasa" + std::to_string(65 + j) + ".csv")) //zamiana int na string, Nazwa pliku powskanie z sumy trzech stringow: "klasa" + std::to_string(65 + j) + ".csv"
+		{
+			t_zapisOddzialu[j] = true;
+		}
+		else
+		{
+			t_zapisOddzialu[j] = false;
+			std::cout << "ERROR w metodzie sekretariat::stworzOddzialy ();\nNie zapisano do pliku oddzialu " << std::to_string(65 + j) << std::endl;
+		}
 	}
-	else
+
+	bool czyZapisane = true;
+
+	for (int j = 0; j < Uczen::wybor::MAX_WYBOR; j++)
 	{
-		czyZapisane = false;
-		cout << "ERROR w metodzie sekretariat::stworzOddzialy ();\nNie zapisano do pliku oddzialu A\n";
+		//jesli ktorakolwiek z wartosci t_zapisOddzialu[j] bedzie false to czyZapisane tez bedzie false;
+		czyZapisane = czyZapisane && t_zapisOddzialu[j];
 	}
-	 // TODO: nie sprawdzamy, co zwrocila funkcja wypiszListeUczniow
-	t_oddzial[Uczen::B].wypiszListeUczniow("klasaB.csv"); // TODO: Uczen::B ?
-	t_oddzial[Uczen::C].wypiszListeUczniow("klasaC.csv");
-	t_oddzial[Uczen::D].wypiszListeUczniow("klasaD.csv");
-	t_oddzial[Uczen::E].wypiszListeUczniow("klasaE.csv");
-	t_oddzial[Uczen::F].wypiszListeUczniow("klasaF.csv");
+
 
 	return czyZapisane;
 
