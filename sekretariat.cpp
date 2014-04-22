@@ -3,7 +3,6 @@
 #include "Nabor.h"
 #include "Uczen.h"
 #include <string>
-#include <conio.h>
 
 
 // TODO: dlaczego funkcja start jest tak cholernie dluga?
@@ -63,8 +62,8 @@ bool sekretariat::start (std::string plik_csv)
 
 // TODO: po co ta funkcja?
 bool sekretariat::stworzOddzialy ()
-{	 // TODO: nie sprawdzamy, co zwrocila funkcja wypiszListeUczniow
-
+{	 
+	// TODO: nie sprawdzamy, co zwrocila funkcja wypiszListeUczniow
 	//t_zapisOddzialu[] w tablicy znajduj¹ siê wartosci true gdy udalosie zapisac
 	bool t_zapisOddzialu[Uczen::wybor::MAX_WYBOR] = { false };
 
@@ -84,6 +83,7 @@ bool sekretariat::stworzOddzialy ()
 		else
 		{
 			t_zapisOddzialu[j] = false;
+
 			std::cout << "ERROR w metodzie sekretariat::stworzOddzialy ();"
 			<< std::endl << "Nie zapisano do pliku oddzialu " << (char)(65 + j) << std::endl;
 		}
