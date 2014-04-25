@@ -2,8 +2,7 @@
 #define _NABOR_H
 
 #include "Uczen.h"
-#include "oddzial.h"
-#include "sekretariat.h"
+
 #include <vector>
 class Nabor
 {

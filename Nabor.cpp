@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <string>
 #include <cstring>
-using namespace std;
+
 
 /* Metody Publiczne : */
 int Nabor::ilosc()
@@ -19,11 +19,11 @@ Nabor::Nabor(std::string sciezkaDoPliku)
 {
 	if (sciezkaDoPliku == "")
 	{
-		cout << "Brak sciezki do pliku! -- Nabor::Nabor" << endl;
+		std::cout << "Brak sciezki do pliku! -- Nabor::Nabor" << std::endl;
 	}
 	if (pobranieDanych(sciezkaDoPliku) == false)
 	{
-		cout << "Blad podczas wpisywania danych z pliku! -- Nabor::Nabor" << endl;
+		std::cout << "Blad podczas wpisywania danych z pliku! -- Nabor::Nabor" << std::endl;
 	}
 }
 
@@ -31,7 +31,7 @@ bool Nabor::podaj_ucznia(int numerUcznia, Uczen *pUczen)
 {
 	if (numerUcznia<0 || numerUcznia >= ileWersow)
 	{
-		cout << "Uczen o podanym indeksie nie istnieje -- Nabor::podaj_ucznia" << endl;
+		std::cout << "Uczen o podanym indeksie nie istnieje -- Nabor::podaj_ucznia" << std::endl;
 		return false;
 	}
 	*pUczen = tabUczniow[numerUcznia];
@@ -40,9 +40,9 @@ bool Nabor::podaj_ucznia(int numerUcznia, Uczen *pUczen)
 
 
 /*---------------------- Metody Prywatne -------------------- */
-bool czyInt(string str);
-bool czyTabChar(string str);
-Uczen::wybor Nabor::strDoWybor(string str)
+bool czyInt(std::string str);
+bool czyTabChar(std::string str);
+Uczen::wybor Nabor::strDoWybor(std::string str)
 {
 	str[0] = toupper(str[0]);
 	if (str == "A") return Uczen::A;
@@ -51,11 +51,11 @@ Uczen::wybor Nabor::strDoWybor(string str)
 	if (str == "D") return Uczen::D;
 	if (str == "E") return Uczen::E;
 	if (str == "F") return Uczen::F;
-	cout << "Klasa podana przy preferowanych wyborze jest bledana. Uczen((Wers w pilku) nr" << ileWersow << "Nabor::strDoWybor" << endl;
+	std::cout << "Klasa podana przy preferowanych wyborze jest bledana. Uczen((Wers w pilku) nr" << ileWersow << "Nabor::strDoWybor" << std::endl;
 	return Uczen::UNINITIALIZED;
 }
 
-Uczen::jezyk Nabor::strDoJezyk(string str)
+Uczen::jezyk Nabor::strDoJezyk(std::string str)
 {
 	for (unsigned int i = 0; i < str.length(); i++)
 	{
@@ -64,11 +64,11 @@ Uczen::jezyk Nabor::strDoJezyk(string str)
 	}
 	if (str == "angielski") return Uczen::angielski;
 	if (str == "niemiecki") return Uczen::niemiecki;
-	cout << "Jezyk prowadzacy podany w pliku jest bledny. Uczen((Wers w pilku) nr" << ileWersow << "Nabor::strDoJezyk" << endl;
+	std::cout << "Jezyk prowadzacy podany w pliku jest bledny. Uczen((Wers w pilku) nr" << ileWersow << "Nabor::strDoJezyk" << std::endl;
 	return Uczen::DUNNO;
 }
 
-bool Nabor::pobranieDanych(const string sciezkaDoPliku)
+bool Nabor::pobranieDanych(const std::string sciezkaDoPliku)
 {
 	Uczen::jezyk jezykWPodstawowce;
 	Uczen::wybor wybor1Ucznia;
@@ -78,14 +78,14 @@ bool Nabor::pobranieDanych(const string sciezkaDoPliku)
 	const int dodPunktyNiem = 101, maxKomorek = 12, ilInformacjiWPliku = 13;
 	int indeksInfZPliku = 0, punktyUcznia = 0; 
 
-	string sZawartoscDanych, temp[ilInformacjiWPliku];
+	std::string sZawartoscDanych, temp[ilInformacjiWPliku];
 	const std::string delimiter = ";";
 
-	ifstream plik;
+	std::ifstream plik;
 	plik.open(sciezkaDoPliku.c_str());
 	if (plik.good() == false)
 	{
-		cout << "Nie udalo sie otworzyc pliku -- Nabor::wpis_z_pliku" << endl;
+		std::cout << "Nie udalo sie otworzyc pliku -- Nabor::wpis_z_pliku" << std::endl;
 		return false;
 	}
 	while (getline(plik, sZawartoscDanych))//Odczytanie informacji z pliku i zapisanie ich w kolejnych miejscach tabeli
@@ -96,7 +96,7 @@ bool Nabor::pobranieDanych(const string sciezkaDoPliku)
 		{
 			if (indeksInfZPliku > maxKomorek)
 			{
-				cout << "Zly format pliku, zbyt duza ilosc komorek danych w wierszu. Uczen(Wers w pilku) nr: " << ileWersow << "  -- Nabor::wpis_z_pliku" << endl;
+				std::cout << "Zly format pliku, zbyt duza ilosc komorek danych w wierszu. Uczen(Wers w pilku) nr: " << ileWersow << "  -- Nabor::wpis_z_pliku" << std::endl;
 				return false;
 			}
 			temp[indeksInfZPliku] = sZawartoscDanych.substr(0, pos); //Przypisanie do tymczasowej tablicy kolejnych stringow z pliku
@@ -110,12 +110,12 @@ bool Nabor::pobranieDanych(const string sciezkaDoPliku)
 
 		if (!czyInt(temp[punktyEnum]))
 		{
-			cout << "Zly format pliku, koluma punkty! Uczen(Wers w pilku) nr: " << ileWersow << " -- Nabor::wpis_z_pliku" << endl;
+			std::cout << "Zly format pliku, koluma punkty! Uczen(Wers w pilku) nr: " << ileWersow << " -- Nabor::wpis_z_pliku" << std::endl;
 		}
 		punktyUcznia = atoi(temp[punktyEnum].c_str());
 		if (punktyUcznia<0 || punktyUcznia>100)
 		{
-			cout << "Blad! Niepoprawna ilosc punktow! Uczen(Wers w pilku) nr: " << ileWersow << " -- Nabor::wpis_z_pliku" << endl;
+			std::cout << "Blad! Niepoprawna ilosc punktow! Uczen(Wers w pilku) nr: " << ileWersow << " -- Nabor::wpis_z_pliku" << std::endl;
 			return false;
 		}
 
@@ -127,8 +127,8 @@ bool Nabor::pobranieDanych(const string sciezkaDoPliku)
 			
 			if (!poprawnyFormatDanych)
 			{
-				cout << "Bledny format danych. Uczen(Wers w pliku) nr: " << ileWersow << " -- Nabor::wpis_z_pliku" << endl;
-				cout << temp[i] << endl;
+				std::cout << "Bledny format danych. Uczen(Wers w pliku) nr: " << ileWersow << " -- Nabor::wpis_z_pliku" << std::endl;
+				std::cout << temp[i] << std::endl;
 				return false;
 			}
 		}
@@ -136,7 +136,7 @@ bool Nabor::pobranieDanych(const string sciezkaDoPliku)
 		{
 			if (temp[i].length()> 1)
 			{
-				cout << "Bledny format preferowanego wyboru ucznia. Uczen(Wers w pliku) nr" << ileWersow << endl;
+				std::cout << "Bledny format preferowanego wyboru ucznia. Uczen(Wers w pliku) nr" << ileWersow << std::endl;
 				return false;
 			}
 		}
@@ -169,7 +169,7 @@ void Nabor::sortowanieMalejace(std::vector <Uczen> tabUczniow)
 }
 
 //Funckje wykorzystywane do okreslania poprawnosci formatu danych
-bool czyInt(string str)
+bool czyInt(std::string str)
 {
 	for (unsigned int i = 0; i < str.length(); i++)
 	{
@@ -181,7 +181,7 @@ bool czyInt(string str)
 	return true;
 }
 
-bool czyTabChar(string str)
+bool czyTabChar(std::string str)
 {
 	for (unsigned int i = 0; i < str.length(); i++)
 	{

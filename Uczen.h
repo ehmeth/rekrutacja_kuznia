@@ -1,7 +1,7 @@
 #ifndef _UCZEN_H_
 #define _UCZEN_H_
 
-#include <iostream>
+
 #include <string>
 
 class Uczen

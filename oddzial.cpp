@@ -1,7 +1,8 @@
-#include "oddzial.h"
 #include <fstream>
 #include <string>
-using namespace std;
+#include "Uczen.h"
+#include "oddzial.h"
+
 
 bool oddzial::dodajUcznia(Uczen kandydat)
 {
@@ -23,7 +24,7 @@ bool oddzial::wypiszListeUczniow(std::string oddzial_csv)
 	//  odp: argumenty niepotrzebne,nale¿¹ do klasy uczeñ wiêc metoda "widzi" je
 	segregujUczniow();
 
-	ofstream outfile(oddzial_csv.c_str());
+	std::ofstream outfile(oddzial_csv.c_str());
 	if (outfile.is_open())
 	{
 		for (int i = 0; i < liczba_uczniow_w_oddziale; i++)

@@ -1,82 +1,88 @@
-// NIE DOKONCZONY
-
-#include "Nabor.h"
-#include "Uczen.h"
+#include <iostream>
 #include <string>
 
+#include "sekretariat.h"
 
-// TODO: dlaczego funkcja start jest tak cholernie dluga?
-bool sekretariat::start (std::string plik_csv)
+
+
+
+bool sekretariat::start(std::string plik_csv)
 {
-	Nabor nowyNabor(plik_csv);	// TODO: nie robimy magic numbers
+	Nabor nowyNabor(plik_csv);
 	Uczen kandydat;
-	//przenosze tablice klasa[] do sekcji private klasy sekretariat.h z nowa nazwa t_oddzial, 
-	//zeby tablica t_oddzialy byla dostepna dla wszystkich metod klasy sekretariat.h	// TODO: slowo kluczowe "klasa" jest niefortunne
-	bool kandydatDodany = false;
 
-	for (int i = 0; i < nowyNabor.ilosc(); i++) // przypisanie uczniow do oddzialow
+	bool kandydatDodany = false;
+	//int uczniowwklasie[MAX.WYBOR];
+	// uczniowwklasie = {0};       wyzerowanie elementów
+
+	for (int i = 0; i < nowyNabor.ilosc(); i++)
 	{
 		if (nowyNabor.podaj_ucznia(i, &kandydat))
 		{
-			if (kandydat.podaj_jezyk() == kandydat.niemiecki) // dodawanie kandydat z jez. niemieckim do klasy C
+			if (kandydat.podaj_jezyk() == kandydat.niemiecki)
 			{
-				t_oddzial[kandydat.C].dodajUcznia(kandydat); // TODO: nie sprawdzamy, co zwrocila funkcja dodajUcznia
+				t_oddzial[kandydat.C].dodajUcznia(kandydat);
+				// uczniowwklasie[kandydat.C] ++;
 			}
-			else // dodawanie po preferencjach pozostalych kandydatow do pozostalych klas
+			else
 			{
 
-				for (int j = 0; j < 3; j++) // TODO: magic number; j = preferencje kandydata, sa 3. 
+				for (int j = 0; j < 3; j++)
 				{
 					if (t_oddzial[kandydat.podaj_wybor(j)].dodajUcznia(kandydat))
 					{
-						kandydatDodany = true; // kandydat dodany wg swoich preferencji
+						// uczniowwklasie[kandydat.podaj_wybor(j)] ++;
+						kandydatDodany = true;
 						break;
 					}
 
 				}
 				if (kandydatDodany == false)
-				// nieudane przypisanie po preferencjach, przypisanie do pierwszego wolnego miejsca
-				{
-					// TODO: przy takim algorytmie klasa A bedzie najbardziej obciazona i w niej pierwszej zabraknie miejsc.
-					// W tym momencie kandydaci z konca listy nie dostana sie do niej, nawet jak bedzie to ich pierwszy wybor.
-					// Czy nie mozna wymyslic lepszego sposobu?
 
-					for (int j = 0; j < kandydat.MAX_WYBOR; j++) // j = numery wszystkich oddzialow
+				{
+					/* W nastepnych liniach 45-57 zmieniony jest caly tok rozumowania. Przyjmujemy ze wartosc minimalna = 0, sprawdzamy po kolei klasy, w ktorej jest
+					najmniej uczniow. Jak ju¿ mamy min to wtedy dorzucamy ucznia do danej klasy*/
+
+
+					//int min = 0;
+					for (int j = 0; j < kandydat.MAX_WYBOR; j++)
 					{
-						if (t_oddzial[j].dodajUcznia(kandydat))
+						//		if (uczniowwklasie[j] <= min)
+						//		{
+						//			min = uczniowwklasie[j];
+						//		}
+						//	}
+						//		if (t_oddzial[min].dodajUcznia(kandydat))
 						{
-							kandydatDodany = true; // kandydat dodany wg swoich preferencji
+							kandydatDodany = true;
 							break;
 						}
 					}
 				}
-				//dodaje ucznia do pierwszej klasy w ktorej sa wolne miejsca
+
 			}
 		}
-	} // for (int i = 0; i < nowyNabor.ilosc(); i++)
 
-	//przenosze zapisanie wszystkich oddzialow do metody klasy sekretariat::stworzOddzialy()
-	return kandydatDodany; // TODO: co TAK NAPRAWDE zostanie tutaj zwrocone i dlaczego?
+	}
+	return kandydatDodany;
 }
 
 
-// TODO: po co ta funkcja?
-bool sekretariat::stworzOddzialy ()
-{	 
-	// TODO: nie sprawdzamy, co zwrocila funkcja wypiszListeUczniow
-	//t_zapisOddzialu[] w tablicy znajduj¹ siê wartosci true gdy udalosie zapisac
-	bool t_zapisOddzialu[Uczen::wybor::MAX_WYBOR] = { false };
+bool sekretariat::stworzOddzialy()
+{
+
+	bool t_zapisOddzialu[Uczen::MAX_WYBOR] = { false };
 
 	std::string nazwaPlikuWynikowego = "";
 
-	for (int j = 0; j < Uczen::wybor::MAX_WYBOR; j++)
-	{	
-		//Nazwa pliku powstanie z sumy stringow i litery: "klasa" + (char)(65 + j) + ".csv"
+	for (int j = 0; j < Uczen::MAX_WYBOR; j++)
+	{
+
 		nazwaPlikuWynikowego = "klasa";
-		nazwaPlikuWynikowego += ((char)(65 + j)); //((char)(65 + 0)) == A;
+		nazwaPlikuWynikowego += ((char)(65 + j));
 		nazwaPlikuWynikowego += ".csv";
 
-		if (t_oddzial[j].wypiszListeUczniow(nazwaPlikuWynikowego)) 
+		if (t_oddzial[j].wypiszListeUczniow(nazwaPlikuWynikowego))
 		{
 			t_zapisOddzialu[j] = true;
 		}
@@ -85,15 +91,15 @@ bool sekretariat::stworzOddzialy ()
 			t_zapisOddzialu[j] = false;
 
 			std::cout << "ERROR w metodzie sekretariat::stworzOddzialy ();"
-			<< std::endl << "Nie zapisano do pliku oddzialu " << (char)(65 + j) << std::endl;
+				<< std::endl << "Nie zapisano do pliku oddzialu " << (char)(65 + j) << std::endl;
 		}
 	}
 
 	bool czyZapisane = true;
 
-	for (int j = 0; j < Uczen::wybor::MAX_WYBOR; j++)
+	for (int j = 0; j < Uczen::MAX_WYBOR; j++)
 	{
-		//jesli ktorakolwiek z wartosci t_zapisOddzialu[j] bedzie false to czyZapisane tez bedzie false;
+
 		czyZapisane = czyZapisane && t_zapisOddzialu[j];
 	}
 
@@ -101,6 +107,7 @@ bool sekretariat::stworzOddzialy ()
 	return czyZapisane;
 
 }
+
 
 
 sekretariat::sekretariat(std::string plik_csv)

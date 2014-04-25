@@ -1,5 +1,5 @@
 #include "Uczen.h"
-using namespace std;
+
 
 
 Uczen::Uczen()

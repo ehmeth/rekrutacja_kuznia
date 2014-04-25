@@ -1,7 +1,5 @@
 #include "sekretariat.h"
-#include "oddzial.h"
-#include "Nabor.h"
-using namespace std;
+
 
 // Potrzeba nam programu, który obrobi automatem przydzielanie dzieciaków z rekrutacji do otwieranych klas. Wymagania s¹ nastêpuj¹ce:
 // - W przysz³ym roku szko³a planuje otworzyæ 6 pierwszych klas.

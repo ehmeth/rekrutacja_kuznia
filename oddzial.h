@@ -1,8 +1,6 @@
 #ifndef _ODDZIAL_H
 #define _ODDZIAL_H
 
-#include <string>
-#include "Uczen.h"
 
 class oddzial
 {
