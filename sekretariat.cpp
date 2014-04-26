@@ -3,17 +3,12 @@
 
 #include "sekretariat.h"
 
-
-
-
 bool sekretariat::start(std::string plik_csv)
 {
 	Nabor nowyNabor(plik_csv);
 	Uczen kandydat;
 
 	bool kandydatDodany = false;
-	//int uczniowwklasie[MAX.WYBOR];
-	// uczniowwklasie = {0};       wyzerowanie elementów
 
 	for (int i = 0; i < nowyNabor.ilosc(); i++)
 	{
@@ -22,48 +17,36 @@ bool sekretariat::start(std::string plik_csv)
 			if (kandydat.podaj_jezyk() == kandydat.niemiecki)
 			{
 				t_oddzial[kandydat.C].dodajUcznia(kandydat);
-				// uczniowwklasie[kandydat.C] ++;
 			}
 			else
 			{
-
 				for (int j = 0; j < 3; j++)
 				{
 					if (t_oddzial[kandydat.podaj_wybor(j)].dodajUcznia(kandydat))
 					{
-						// uczniowwklasie[kandydat.podaj_wybor(j)] ++;
 						kandydatDodany = true;
 						break;
 					}
-
 				}
 				if (kandydatDodany == false)
-
 				{
 					/* W nastepnych liniach 45-57 zmieniony jest caly tok rozumowania. Przyjmujemy ze wartosc minimalna = 0, sprawdzamy po kolei klasy, w ktorej jest
 					najmniej uczniow. Jak ju¿ mamy min to wtedy dorzucamy ucznia do danej klasy*/
 
-
-					//int min = 0;
 					for (int j = 0; j < kandydat.MAX_WYBOR; j++)
 					{
-						//		if (uczniowwklasie[j] <= min)
-						//		{
-						//			min = uczniowwklasie[j];
-						//		}
-						//	}
-						//		if (t_oddzial[min].dodajUcznia(kandydat))
+						if (t_oddzial[j].dodajUcznia(kandydat))
 						{
 							kandydatDodany = true;
 							break;
 						}
 					}
 				}
-
 			}
 		}
-
 	}
+	stworzOddzialy();
+	
 	return kandydatDodany;
 }
 

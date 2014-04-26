@@ -1,5 +1,6 @@
 #include <fstream>
 #include <string>
+#include <iostream>
 #include "Uczen.h"
 #include "oddzial.h"
 
@@ -33,6 +34,10 @@ bool oddzial::wypiszListeUczniow(std::string oddzial_csv)
 		}
 		outfile.close();
 		return true;
+	}
+	else
+	{
+		std::cout << "nie udalo sie otworzyc pliku: " << oddzial_csv << std::endl;
 	}
 	return false;
 }
