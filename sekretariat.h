@@ -1,10 +1,10 @@
 #ifndef _SEKRETERIAT_H_
 #define _SEKRETERIAT_H_
 
-
 #include "Uczen.h"
 #include "oddzial.h"
 #include "Nabor.h"
+
 class sekretariat 
 {
 public:
@@ -69,8 +69,7 @@ private:
 		false	jesli nie dodano, (nie mam miejsca w oddziale)
 	*/
 	bool dodajUczniaJezyk(Nabor nowy);
-	//bool dodajUczniaPoJezyku(Nabor nowyNabor, Uczen::jezyk kryteriumJezyk, Uczen::wybor ktoryOddzial );
-	
+
 };
 
 
