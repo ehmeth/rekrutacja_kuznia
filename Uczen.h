@@ -1,7 +1,6 @@
 #ifndef _UCZEN_H_
 #define _UCZEN_H_
 
-
 #include <string>
 
 class Uczen
@@ -15,13 +14,11 @@ class Uczen
 		std::string imie;
 		int punkty;
 		static const int liczba_wyborow = 3;
-		wybor wyborUcznia[liczba_wyborow];	// TODO: magic number
+		wybor wyborUcznia[liczba_wyborow];
 		jezyk wyborJezyka;
 
-
-
 	public:
-			// metoda podaj_nazwisko - zwraca stringa zawierajacego nazwisko i imie ucznia;
+			/* metoda podaj_nazwisko - zwraca stringa zawierajacego nazwisko i imie ucznia*/
 		std::string podaj_nazwisko();
 			/* metoda liczba_punktow -
 			Wartosc zwracana: liczbe punktow ucznia; */
@@ -35,6 +32,7 @@ class Uczen
 		wybor podaj_wybor(int ktoryWybor);
 
 		Uczen();
-		Uczen(std::string aImie, std::string aNazwisko, int aPunkty, jezyk aJezyk, wybor aWybor1, wybor aWybor2, wybor aWybor3); //konstruktor
+		Uczen(std::string aImie, std::string aNazwisko, int aPunkty,
+        jezyk aJezyk, wybor aWybor1, wybor aWybor2, wybor aWybor3);
 };
 #endif

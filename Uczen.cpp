@@ -1,7 +1,5 @@
 #include "Uczen.h"
 
-
-
 Uczen::Uczen()
 
 	{
@@ -13,7 +11,6 @@ Uczen::Uczen()
 		wyborUcznia[1] = UNINITIALIZED;
 		wyborUcznia[2] = UNINITIALIZED;
 	}
-
 
 Uczen::Uczen(std::string aImie, std::string aNazwisko, int aPunkty,
 			jezyk aJezyk,wybor aWybor1,wybor aWybor2,wybor aWybor3)
@@ -30,9 +27,7 @@ Uczen::Uczen(std::string aImie, std::string aNazwisko, int aPunkty,
 
 std::string Uczen::podaj_nazwisko()
 {
-	return nazwisko + " " + imie ;	// TODO: dlaczego imie jako pierwsze, skoto ma segregowac po nazwiskach? 
-	// odp: zostanie poprawione jak znajdziemy pierwotny b³¹d
-}
+	return nazwisko + " " + imie ;
 
 int Uczen::podaj_liczba_punktow()
 {
