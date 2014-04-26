@@ -2,10 +2,17 @@
 #include <string>
 
 #include "sekretariat.h"
+using namespace std;
 
 bool sekretariat::start(std::string plik_csv)
 {
 	Nabor nowyNabor(plik_csv);
+	if (nowyNabor.pobranieDanych(plik_csv) == false)
+	{
+		cout << "Blad podczas wpisywania danych z pliku!" << endl;
+		return false;
+	}
+
 	Uczen kandydat;
 
 	bool kandydatDodany = false;

@@ -18,6 +18,8 @@ class Nabor
 	Nabor(std::string sciezkaDoPliku);
 	   //Pobiera sciezke do pliku i tworzy tabele uczniow posortowana wedlug punktow osoby z niemieckim jako podstawowym umieszczane sa na poczatku tabeli
 
+	bool pobranieDanych(std::string sciezkaDoPliku);
+
 
 	private:
 	std::vector <Uczen> tabUczniow;
@@ -25,7 +27,6 @@ class Nabor
 
 	Uczen::wybor strDoWybor(std::string str);
 	Uczen::jezyk strDoJezyk(std::string str);
-	bool pobranieDanych(std::string sciezkaDoPliku);
 	void sortowanieMalejace(std::vector <Uczen> tabUczniow);
 };
 #endif // _NABOR_H

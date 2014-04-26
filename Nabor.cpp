@@ -26,10 +26,6 @@ Nabor::Nabor(string sciezkaDoPliku)
 		cout << "Brak sciezki do pliku! -- Nabor::Nabor" << endl;
 	}
     
-	if (pobranieDanych(sciezkaDoPliku) == false)
-	{
-		cout << "Blad podczas wpisywania danych z pliku! -- Nabor::Nabor" << endl;
-	}
 }
 
 bool Nabor::podaj_ucznia(int numerUcznia, Uczen *pUczen)
