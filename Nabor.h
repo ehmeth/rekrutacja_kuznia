@@ -1,6 +1,5 @@
 #ifndef _NABOR_H
 #define _NABOR_H
-
 #include "Uczen.h"
 #include <vector>
 
