@@ -8,7 +8,6 @@
 #include <string>
 #include <cstring>
 
-
 /* Metody Publiczne : */
 int Nabor::ilosc()
 {
@@ -17,6 +16,7 @@ int Nabor::ilosc()
 
 Nabor::Nabor(std::string sciezkaDoPliku)
 {
+	setlocale(LC_ALL, "");
 	if (sciezkaDoPliku == "")
 	{
 		std::cout << "Brak sciezki do pliku! -- Nabor::Nabor" << std::endl;
@@ -82,7 +82,7 @@ bool Nabor::pobranieDanych(const std::string sciezkaDoPliku)
 	const std::string delimiter = ";";
 
 	std::ifstream plik;
-	plik.open(sciezkaDoPliku.c_str());
+	//plik.open(sciezkaDoPliku.c_str());
 	if (plik.good() == false)
 	{
 		std::cout << "Nie udalo sie otworzyc pliku -- Nabor::wpis_z_pliku" << std::endl;
@@ -186,7 +186,6 @@ bool czyTabChar(std::string str)
 	for (unsigned int i = 0; i < str.length(); i++)
 	{
 		if (!(isalpha(str[i]) || str[i] == 63 )) //Sprawdza czy string w csv sk³ada siê z samych liter
-			//oraz ze wzglêdu na to ¿e polskie litery nie s¹ reprezentowane przez '?' W csv, akceptuje te¿ mo¿liwoœæ wyst¹pienia '?'
 		{
 			return false;
 		}
