@@ -30,9 +30,6 @@ bool sekretariat::start(std::string plik_csv)
 				}
 				if (kandydatDodany == false)
 				{
-					/* W nastepnych liniach 45-57 zmieniony jest caly tok rozumowania. Przyjmujemy ze wartosc minimalna = 0, sprawdzamy po kolei klasy, w ktorej jest
-					najmniej uczniow. Jak ju¿ mamy min to wtedy dorzucamy ucznia do danej klasy*/
-
 					for (int j = 0; j < kandydat.MAX_WYBOR; j++)
 					{
 						if (t_oddzial[j].dodajUcznia(kandydat))
@@ -46,7 +43,7 @@ bool sekretariat::start(std::string plik_csv)
 		}
 	}
 	stworzOddzialy();
-	
+
 	return kandydatDodany;
 }
 
@@ -60,7 +57,6 @@ bool sekretariat::stworzOddzialy()
 
 	for (int j = 0; j < Uczen::MAX_WYBOR; j++)
 	{
-
 		nazwaPlikuWynikowego = "klasa";
 		nazwaPlikuWynikowego += ((char)(65 + j));
 		nazwaPlikuWynikowego += ".csv";
@@ -82,16 +78,11 @@ bool sekretariat::stworzOddzialy()
 
 	for (int j = 0; j < Uczen::MAX_WYBOR; j++)
 	{
-
 		czyZapisane = czyZapisane && t_zapisOddzialu[j];
 	}
 
-
 	return czyZapisane;
-
 }
-
-
 
 sekretariat::sekretariat(std::string plik_csv)
 {
