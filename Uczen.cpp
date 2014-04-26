@@ -27,8 +27,8 @@ Uczen::Uczen(std::string aImie, std::string aNazwisko, int aPunkty,
 
 std::string Uczen::podaj_nazwisko()
 {
-	return nazwisko + " " + imie ;
-
+	return nazwisko + " " + imie;
+}
 int Uczen::podaj_liczba_punktow()
 {
 	return punkty;
