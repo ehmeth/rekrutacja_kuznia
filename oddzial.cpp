@@ -13,18 +13,12 @@ bool oddzial::dodajUcznia(Uczen kandydat)
 		liczba_uczniow_w_oddziale++;
 		return true;
 	}
-	
 	return false;
-
 }
 
 bool oddzial::wypiszListeUczniow(std::string oddzial_csv)
 {
-	// TODO: dlaczego tutaj jest uzyte :: ? Do ktorego obiektu klasy oddzial odnosi sie taki zapis? odp: usuniêto ::
-	// TODO: Po co tej funkcji potrzebne sa jakiekolwiek argumenty?   
-	//  odp: argumenty niepotrzebne,nale¿¹ do klasy uczeñ wiêc metoda "widzi" je
 	segregujUczniow();
-
 	std::ofstream outfile(oddzial_csv.c_str());
 	if (outfile.is_open())
 	{
@@ -45,15 +39,12 @@ bool oddzial::wypiszListeUczniow(std::string oddzial_csv)
 void oddzial::segregujUczniow()
 
 {
-
 	for (int i = liczba_uczniow_w_oddziale - 1; i >= 0; i--)
-		
 	for (int l = 0; l<i; l++)
 	{
 		if (lista_uczniow_w_oddziale[l].podaj_nazwisko() > lista_uczniow_w_oddziale[l + 1].podaj_nazwisko())
 		{
 			std::swap(lista_uczniow_w_oddziale[l], lista_uczniow_w_oddziale[l + 1]);
-
 		}
 	}
 }
