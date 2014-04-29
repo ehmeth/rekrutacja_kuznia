@@ -163,7 +163,7 @@ bool Nabor::pobranieDanych(const string sciezkaDoPliku)
 		tabUczniow.push_back(Uczen(temp[ImieEnum], temp[NazwiskoEnum], punktyUcznia, jezykWPodstawowce, wybor1Ucznia, wybor2Ucznia, wybor3Ucznia));
 	}
 	plik.close();
-	ileWersow = tabUczniow.size();
+	ileWersow = (int)tabUczniow.size();
     
     //Sortowanie malejace otrzymanej tabeli.
 	sortowanieMalejace(tabUczniow);
