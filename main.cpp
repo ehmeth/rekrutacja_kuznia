@@ -21,7 +21,7 @@
 
 int main()
 {
-	sekretariat oSekretariat("lista.csv");
+    sekretariat oSekretariat("lista.csv");
 
-	return 0;
+    return 0;
 }

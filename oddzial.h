@@ -4,37 +4,39 @@
 
 class oddzial
 {
-	public:
-/*	dodajUcznia - dodaje ucznia do oddzialu jesli jest miejsce,
-	Arg.we:
-	uczen kandydat - obiekt klasy uczen; pobiera od ucznia dane o jezyku, punktach i preferencjach
-	Zwracane:
-	true - udalo sie przypisac ucznia do klasy,
-	false - nie udalo sie
-*/
-	bool dodajUcznia (Uczen kandydat);
+public:
+    /*	dodajUcznia - dodaje ucznia do oddzialu jesli jest miejsce,
+        Arg.we:
+        uczen kandydat - obiekt klasy uczen; pobiera od ucznia dane o jezyku, punktach i preferencjach
+        Zwracane:
+        true - udalo sie przypisac ucznia do klasy,
+        false - nie udalo sie
+    */
+    bool dodajUcznia (Uczen kandydat);
 
+    /*	wypiszListeUczniow - eksportuje liste uczniow do pliku zewnetrznego,
+        Arg.we:
+        oddzial_csv - nazwa pliku, w ktorym zostana zapisani uczniowie z danej klasy
+        Zwracane:
+        true - udalo sie wyeksportowac dane do pliku zewnetrzego,
+        false - nie udalo sie
+    */
+    bool wypiszListeUczniow (std::string oddzial_csv);
 
-/*	wypiszListeUczniow - eksportuje liste uczniow do pliku zewnetrznego,
-	Arg.we:
-	oddzial_csv - nazwa pliku, w ktorym zostana zapisani uczniowie z danej klasy
-	Zwracane:
-	true - udalo sie wyeksportowac dane do pliku zewnetrzego,
-	false - nie udalo sie
-*/
-	bool wypiszListeUczniow (std::string oddzial_csv);
+    //todo dowiem sie co oznacza ten zapis
+    oddzial()
+        :liczba_uczniow_w_oddziale(0) {};
+    int ileUczniowWOddziale()
+    {
+        return liczba_uczniow_w_oddziale;
+    }
 
-	oddzial() 
-	:liczba_uczniow_w_oddziale(0) {};
+private:
+    static const int  max_licz_uczniow = 22;
+    int liczba_uczniow_w_oddziale;
+    Uczen lista_uczniow_w_oddziale[max_licz_uczniow];
 
-	private:
-	static const int  max_licz_uczniow = 22;
-	int liczba_uczniow_w_oddziale;
-	Uczen lista_uczniow_w_oddziale[max_licz_uczniow];
-
-	void segregujUczniow ();
-
-
+    void segregujUczniow ();
 
 };
 
