@@ -87,7 +87,7 @@ bool Nabor::pobranieDanych(const string sciezkaDoPliku)
 	ifstream plik;
 	plik.open(sciezkaDoPliku.c_str());
     
-	if (plik.good() == false)
+	if (!plik.good())
 	{
 		cout << "Nie udalo sie otworzyc pliku -- Nabor::wpis_z_pliku" << endl;
 		return false;

@@ -4,7 +4,11 @@
 
 class oddzial
 {
-	public:
+public:
+	void podajNumerKlasy(int numer)
+	{
+		numerKlasy = numer;
+	}
 /*	dodajUcznia - dodaje ucznia do oddzialu jesli jest miejsce,
 	Arg.we:
 	uczen kandydat - obiekt klasy uczen; pobiera od ucznia dane o jezyku, punktach i preferencjach
@@ -25,9 +29,11 @@ class oddzial
 	bool wypiszListeUczniow (std::string oddzial_csv);
 
 	oddzial() 
-	:liczba_uczniow_w_oddziale(0) {};
+	:liczba_uczniow_w_oddziale(0),
+	numerKlasy(-1){};
 
 	private:
+	int numerKlasy;
 	static const int  max_licz_uczniow = 22;
 	int liczba_uczniow_w_oddziale;
 	Uczen lista_uczniow_w_oddziale[max_licz_uczniow];

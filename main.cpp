@@ -21,7 +21,7 @@
 
 int main()
 {
-	sekretariat oSekretariat("lista.csv");
-
+	sekretariat oSekretariat("C:\\Users\\user\\Desktop\\GiT\\rekrutacja_kuznia\\lista.csv");
+	getchar();
 	return 0;
 }
