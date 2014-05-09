@@ -5,7 +5,10 @@
 class oddzial
 {
 public:
-	void podajNumerKlasy(int numer){ numerKlasy = numer; };
+	void podajNumerKlasy(int numer)
+	{
+		numerKlasy = numer;
+	}
 /*	dodajUcznia - dodaje ucznia do oddzialu jesli jest miejsce,
 	Arg.we:
 	uczen kandydat - obiekt klasy uczen; pobiera od ucznia dane o jezyku, punktach i preferencjach
@@ -30,7 +33,6 @@ public:
 	numerKlasy(-1){};
 
 	private:
-	const static int punktyNiemiecki = 100;
 	int numerKlasy;
 	static const int  max_licz_uczniow = 22;
 	int liczba_uczniow_w_oddziale;

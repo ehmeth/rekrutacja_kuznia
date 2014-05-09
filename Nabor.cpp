@@ -46,12 +46,12 @@ bool czyTabChar(string str);
 Uczen::wybor Nabor::strDoWybor(string str)
 {
 	str[0] = toupper(str[0]);
-	if (str[0] == 'A') return Uczen::A;
-	if (str[0] == 'B') return Uczen::B;
-	if (str[0] == 'C') return Uczen::C;
-	if (str[0] == 'D') return Uczen::D;
-	if (str[0] == 'E') return Uczen::E;
-	if (str[0] == 'F') return Uczen::F;
+	if (str == "A") return Uczen::A;
+	if (str == "B") return Uczen::B;
+	if (str == "C") return Uczen::C;
+	if (str == "D") return Uczen::D;
+	if (str == "E") return Uczen::E;
+	if (str == "F") return Uczen::F;
 	cout << "Klasa podana przy preferowanych wyborze jest bledana. Uczen((Wers w pilku) nr" << ileWersow << "Nabor::strDoWybor" << endl;
 	return Uczen::UNINITIALIZED;
 }
