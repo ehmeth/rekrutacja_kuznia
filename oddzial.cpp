@@ -18,13 +18,18 @@ bool oddzial::dodajUcznia(Uczen kandydat)
 
 bool oddzial::wypiszListeUczniow(std::string oddzial_csv)
 {
+	int numerWyboru = -1;
 	segregujUczniow();
 	std::ofstream outfile(oddzial_csv.c_str());
 	if (outfile.is_open())
 	{
 		for (int i = 0; i < liczba_uczniow_w_oddziale; i++)
 		{
-			outfile << lista_uczniow_w_oddziale[i].podaj_nazwisko() << '\n';
+			for (int x = 0; x < 3; x++) if (lista_uczniow_w_oddziale[i].podaj_wybor(x) == numerKlasy) numerWyboru = x;
+
+				outfile << lista_uczniow_w_oddziale[i].podaj_nazwisko() << "\t" <<
+				lista_uczniow_w_oddziale[i].podaj_liczba_punktow() << "\t" <<
+					numerWyboru <<'\n';
 		}
 		outfile.close();
 		return true;

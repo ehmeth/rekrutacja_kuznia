@@ -20,7 +20,7 @@ int Nabor::ilosc()
 Nabor::Nabor(string sciezkaDoPliku)
 {
 	setlocale(LC_ALL, "");
-    
+
 	if (sciezkaDoPliku == "")
 	{
 		cout << "Brak sciezki do pliku! -- Nabor::Nabor" << endl;
@@ -43,6 +43,8 @@ bool Nabor::podaj_ucznia(int numerUcznia, Uczen *pUczen)
 /*---------------------- Metody Prywatne -------------------- */
 bool czyInt(string str);
 bool czyTabChar(string str);
+int ilePunktow (string tab[], int indeksPunktow);
+int ilePunktowOceny(string tab[], int indeksPoczatku, int indeksKonca);
 Uczen::wybor Nabor::strDoWybor(string str)
 {
 	str[0] = toupper(str[0]);
@@ -122,7 +124,7 @@ bool Nabor::pobranieDanych(const string sciezkaDoPliku)
 		{
 			cout << "Zly format pliku, koluma punkty! Uczen(Wers w pilku) nr: " << ileWersow << " -- Nabor::wpis_z_pliku" << endl;
 		}
-		punktyUcznia = atoi(temp[punktyEnum].c_str());
+		punktyUcznia = ilePunktowOceny(temp, ocenaPierwsza, punktyDodatkoweEnum) + ilePunktow(temp, punktyEnum) + ilePunktow(temp, punktyDodatkoweEnum);
 		
         if (punktyUcznia<0 || punktyUcznia>100)
 		{
@@ -133,7 +135,7 @@ bool Nabor::pobranieDanych(const string sciezkaDoPliku)
 		bool poprawnyFormatDanych = true;
 		for (int i = 0; i < jezykEnum; i++)
 		{
-			if (i == 2) continue;
+			if (i<=2 || i>=8) continue;
 			poprawnyFormatDanych = czyTabChar(temp[i]);
 			
 			if (!poprawnyFormatDanych)
@@ -170,6 +172,8 @@ bool Nabor::pobranieDanych(const string sciezkaDoPliku)
 	return true;
 }
 
+//Funckje wykorzystywane do okreslania poprawnosci formatu danych. 
+
 void Nabor::sortowanieMalejace(vector <Uczen> tabUczniow)
 {
 	for (int i = ileWersow - 1; i >= 0; i--)
@@ -183,7 +187,6 @@ void Nabor::sortowanieMalejace(vector <Uczen> tabUczniow)
 	}
 }
 
-//Funckje wykorzystywane do okreslania poprawnosci formatu danych.
 bool czyInt(std::string str)
 {
 	for (unsigned int i = 0; i < str.length(); i++)
@@ -206,4 +209,24 @@ bool czyTabChar(string str)
 		}
 	}
 	return true;
+}
+
+int ilePunktowOceny(string tab[], int indeksPoczatku,int indeksKonca)
+{
+	if (indeksKonca - indeksPoczatku < 0)
+	{
+		cout << "B³êdny indeks koñca lub pocz¹tku pubnktów w pliku --- Nabor::ilePunktow";
+		return 0;
+	}
+	unsigned int punkty = 0;
+	for (int i = indeksPoczatku; i < indeksKonca; i++)
+	{
+		punkty += atoi(tab[i].c_str());
+	}
+	return punkty;
+}
+
+int ilePunktow(string tab[], int indeksPoczatku)
+{
+	return atoi(tab[indeksPoczatku].c_str());
 }

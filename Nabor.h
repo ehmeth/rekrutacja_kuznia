@@ -2,12 +2,14 @@
 #define _NABOR_H
 #include "Uczen.h"
 #include <vector>
+#include <array>
 
 class Nabor
 {
 	public:
-		enum indeksyDanychPlik{ ImieEnum = 0, NazwiskoEnum, punktyEnum,
-									wybor_1, wybor_2, wybor_3, jezykEnum };
+		enum indeksyDanychPlik{ ImieEnum = 0, NazwiskoEnum, punktyEnum,ocenaPierwsza,
+			punktyDodatkoweEnum = 8,wybor_1, wybor_2, wybor_3, jezykEnum
+		};
 
 	int ilosc();
 		 // Zwraca ilosc uczniow w tabelii
