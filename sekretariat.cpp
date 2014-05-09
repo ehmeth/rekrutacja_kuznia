@@ -68,6 +68,8 @@ bool sekretariat::stworzOddzialy()
 		nazwaPlikuWynikowego += ((char)(65 + j));
 		nazwaPlikuWynikowego += ".csv";
 
+		t_oddzial[j].podajNumerKlasy(j);
+
 		if (t_oddzial[j].wypiszListeUczniow(nazwaPlikuWynikowego))
 		{
 			t_zapisOddzialu[j] = true;

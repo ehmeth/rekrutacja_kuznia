@@ -25,18 +25,21 @@ bool oddzial::wypiszListeUczniow(std::string oddzial_csv)
 	{
 		for (int i = 0; i < liczba_uczniow_w_oddziale; i++)
 		{
-			for (int x = 0; x < 3; x++) if (lista_uczniow_w_oddziale[i].podaj_wybor(x) == numerKlasy)
+			for (int x = 0; x < 3; x++) if (numerKlasy == lista_uczniow_w_oddziale[i].podaj_wybor(x) )
 			{
-				numerWyboru = x;
+				numerWyboru = x+1;
 				break;
 			}
-				outfile << lista_uczniow_w_oddziale[i].podaj_nazwisko() << ' ' <<
-				lista_uczniow_w_oddziale[i].podaj_liczba_punktow() <<' ' <<
+			outfile << lista_uczniow_w_oddziale[i].podaj_nazwisko() << "  ";
+			if (lista_uczniow_w_oddziale[i].podaj_liczba_punktow() > punktyNiemiecki)
+				outfile << (lista_uczniow_w_oddziale[i].podaj_liczba_punktow() - punktyNiemiecki) << ' ' <<
 					numerWyboru <<'\n';
+			else outfile << lista_uczniow_w_oddziale[i].podaj_liczba_punktow() << ' ' <<
+				numerWyboru << '\n';
 
 				if (minimalnaLiczbaPunktow > lista_uczniow_w_oddziale[i].podaj_liczba_punktow()) minimalnaLiczbaPunktow = lista_uczniow_w_oddziale[i].podaj_liczba_punktow();
 		}
-		outfile << minimalnaLiczbaPunktow << "\n";
+		outfile <<"Minimalna liczba punktow" << minimalnaLiczbaPunktow << "\n";
 		outfile.close();
 		return true;
 	}
