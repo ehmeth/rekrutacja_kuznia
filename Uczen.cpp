@@ -41,3 +41,11 @@ Uczen::jezyk Uczen::podaj_jezyk()
 {
 	return wyborJezyka;
 }
+std::string Uczen::podaj_nazwisko1()
+{
+	return nazwisko;
+}
+std::string Uczen::podaj_imie1()
+{
+	return imie;
+}

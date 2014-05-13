@@ -20,19 +20,19 @@ int Nabor::ilosc()
 Nabor::Nabor(string sciezkaDoPliku)
 {
 	setlocale(LC_ALL, "");
-    
+
 	if (sciezkaDoPliku == "")
 	{
 		cout << "Brak sciezki do pliku! -- Nabor::Nabor" << endl;
 	}
-    
+
 }
 
 bool Nabor::podaj_ucznia(int numerUcznia, Uczen *pUczen)
 {
 	if (numerUcznia<0 || numerUcznia >= ileWersow)
 	{
-		cout << "Uczen o podanym indeksie nie istnieje -- Nabor::podaj_ucznia" << endl;
+		cout << "Lista zawiera " << numerUcznia << "  kandydatow. -- Nabor::podaj_ucznia" << endl;
 		return false;
 	}
 	*pUczen = tabUczniow[numerUcznia];
@@ -63,10 +63,10 @@ Uczen::jezyk Nabor::strDoJezyk(string str)
 		if (str[i] == '\0') break;
 		str[i] = tolower(str[i]);
 	}
-    
+
 	if (str == "angielski") return Uczen::angielski;
 	if (str == "niemiecki") return Uczen::niemiecki;
-    
+
 	cout << "Jezyk prowadzacy podany w pliku jest bledny. Uczen((Wers w pilku) nr" << ileWersow << "Nabor::strDoJezyk" << endl;
 	return Uczen::DUNNO;
 }
@@ -77,28 +77,28 @@ bool Nabor::pobranieDanych(const string sciezkaDoPliku)
 	Uczen::wybor wybor1Ucznia;
 	Uczen::wybor wybor2Ucznia;
 	Uczen::wybor wybor3Ucznia;
-	
+
 	const int dodPunktyNiem = 101, maxKomorek = 12, ilInformacjiWPliku = 13;
-	int indeksInfZPliku = 0, punktyUcznia = 0; 
+	int indeksInfZPliku = 0, punktyUcznia = 0;
 
 	string sZawartoscDanych, temp[ilInformacjiWPliku];
 	const string delimiter = ";";
 
 	ifstream plik;
 	plik.open(sciezkaDoPliku.c_str());
-    
+
 	if (!plik.good())
 	{
 		cout << "Nie udalo sie otworzyc pliku -- Nabor::wpis_z_pliku" << endl;
 		return false;
 	}
-    
+
     //Odczytanie informacji z pliku i zapisanie ich wkolejnych miejscach tabeli.
 	while (getline(plik, sZawartoscDanych))
     {
 		indeksInfZPliku = 0;
 		size_t pos = 0;
-        
+
 		while ((pos = sZawartoscDanych.find(delimiter)) != string::npos)
 		{
 			if (indeksInfZPliku > maxKomorek)
@@ -106,13 +106,13 @@ bool Nabor::pobranieDanych(const string sciezkaDoPliku)
 				cout << "Zly format pliku, zbyt duza ilosc komorek danych w wierszu. Uczen(Wers w pilku) nr: " << ileWersow << "  -- Nabor::wpis_z_pliku" << endl;
 				return false;
 			}
-            
+
             //Przypisanie do tymczasowej tablicy kolejnych stringow z pliku.
 			temp[indeksInfZPliku] = sZawartoscDanych.substr(0, pos);
 			sZawartoscDanych.erase(0, pos + delimiter.length());
 			indeksInfZPliku++;
 		}
-        
+
 		temp[indeksInfZPliku] = sZawartoscDanych.substr(0, pos);
 		sZawartoscDanych.erase(0, pos + delimiter.length());
 
@@ -123,7 +123,7 @@ bool Nabor::pobranieDanych(const string sciezkaDoPliku)
 			cout << "Zly format pliku, koluma punkty! Uczen(Wers w pilku) nr: " << ileWersow << " -- Nabor::wpis_z_pliku" << endl;
 		}
 		punktyUcznia = atoi(temp[punktyEnum].c_str());
-		
+
         if (punktyUcznia<0 || punktyUcznia>100)
 		{
 			cout << "Blad! Niepoprawna ilosc punktow! Uczen(Wers w pilku) nr: " << ileWersow << " -- Nabor::wpis_z_pliku" << endl;
@@ -135,7 +135,7 @@ bool Nabor::pobranieDanych(const string sciezkaDoPliku)
 		{
 			if (i == 2) continue;
 			poprawnyFormatDanych = czyTabChar(temp[i]);
-			
+
 			if (!poprawnyFormatDanych)
 			{
 				cout << "Bledny format danych. Uczen(Wers w pliku) nr: " << ileWersow << " -- Nabor::wpis_z_pliku" << endl;
@@ -152,19 +152,19 @@ bool Nabor::pobranieDanych(const string sciezkaDoPliku)
 			}
 		}
 		jezykWPodstawowce = strDoJezyk(temp[jezykEnum]);
-        
+
         //Dodanie punktow uczniom z niemieckim jako jezykiem prowadzacym w celu ustawienia ich na pocz¹tku tabliy po posortowaniu.
 		if (jezykWPodstawowce == Uczen::niemiecki) punktyUcznia += dodPunktyNiem;
-		wybor1Ucznia = strDoWybor(temp[wybor_1]);                               
+		wybor1Ucznia = strDoWybor(temp[wybor_1]);
 		wybor2Ucznia = strDoWybor(temp[wybor_2]);
 		wybor3Ucznia = strDoWybor(temp[wybor_3]);
-        
+
         //stworzenie ucznia i wpisanie go do tablicy.
 		tabUczniow.push_back(Uczen(temp[ImieEnum], temp[NazwiskoEnum], punktyUcznia, jezykWPodstawowce, wybor1Ucznia, wybor2Ucznia, wybor3Ucznia));
 	}
 	plik.close();
 	ileWersow = tabUczniow.size();
-    
+
     //Sortowanie malejace otrzymanej tabeli.
 	sortowanieMalejace(tabUczniow);
 	return true;

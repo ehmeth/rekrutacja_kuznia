@@ -69,8 +69,8 @@ private:
         true	jesli dodano kandydato do oddzialu
         false	jesli nie dodano, (nie mam miejsca w oddziale)
     */
-    void dodajUczniaPoJezyku(Nabor * pNabor, Uczen * pUczen, Uczen::jezyk, Uczen::wybor);
-    void dodajUczniaPreferen(Nabor * pNabor, Uczen * pUczen);
+    void przydzielPoJezyku(Nabor * pNabor, Uczen * pUczen, Uczen::jezyk, Uczen::wybor);
+    void przydzielPoPreferencji(Nabor * pNabor, Uczen * pUczen);
     bool czyWszyscyDodani();
 
 };

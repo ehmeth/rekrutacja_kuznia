@@ -43,5 +43,9 @@ class Uczen
         {
             return ktoryPrzydzial;
         }
+			/* metoda podaj_nazwisko - zwraca stringa zawierajacego nazwisko ucznia*/
+		std::string podaj_nazwisko1();
+			/* metoda podaj_nazwisko - zwraca stringa zawierajacego imie ucznia*/
+		std::string podaj_imie1();
 };
 #endif

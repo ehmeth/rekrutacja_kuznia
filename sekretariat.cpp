@@ -32,9 +32,9 @@ bool sekretariat::start(std::string plik_csv)
     Uczen kandydat;
 
     bool kandydatDodany     = false;
-    dodajUczniaPoJezyku(&nowyNabor,&kandydat,Uczen::niemiecki,Uczen::C);
+    przydzielPoJezyku(&nowyNabor,&kandydat,Uczen::niemiecki,Uczen::C);
 
-    dodajUczniaPreferen(&nowyNabor,&kandydat);
+    przydzielPoPreferencji(&nowyNabor,&kandydat);
 
     kandydatDodany = czyWszyscyDodani();
     stworzOddzialy();
@@ -81,7 +81,7 @@ bool sekretariat::stworzOddzialy()
     return czyZapisaneOddzialy; //true jesli wszystkie elementy tablicy t_czyZapisalemOddzial sa true;
 }
 
-void sekretariat::dodajUczniaPoJezyku(Nabor * pNabor, Uczen * pUczen, Uczen::jezyk obcyJezyk, Uczen::wybor doOddzialu)
+void sekretariat::przydzielPoJezyku(Nabor * pNabor, Uczen * pUczen, Uczen::jezyk obcyJezyk, Uczen::wybor doOddzialu)
 {
     unsigned int nrKandydata = 0;
     while ( pNabor->podaj_ucznia(nrKandydata,pUczen) )
@@ -104,7 +104,7 @@ void sekretariat::dodajUczniaPoJezyku(Nabor * pNabor, Uczen * pUczen, Uczen::jez
     nrKandydata++;
     }
 }
-void sekretariat::dodajUczniaPreferen(Nabor * pNabor, Uczen * pUczen)
+void sekretariat::przydzielPoPreferencji(Nabor * pNabor, Uczen * pUczen)
 {
     for (int j = 0; j < 3/*Uczen::MAX_WYBOR*/; j++)
     {
