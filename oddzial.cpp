@@ -7,59 +7,55 @@
 
 bool oddzial::dodajUcznia(Uczen kandydat)
 {
-    if (liczba_uczniow_w_oddziale < oddzial::max_licz_uczniow)
-    {
-        lista_uczniow_w_oddziale[liczba_uczniow_w_oddziale] = kandydat;
-        liczba_uczniow_w_oddziale++;
-        return true;
-    }
-    return false;
+	if (liczba_uczniow_w_oddziale < oddzial::max_licz_uczniow)
+	{
+		lista_uczniow_w_oddziale[liczba_uczniow_w_oddziale] = kandydat;
+		liczba_uczniow_w_oddziale++;
+		return true;
+	}
+	return false;
 }
 
 bool oddzial::wypiszListeUczniow(std::string oddzial_csv)
 {
-    segregujUczniow();
-    std::ofstream outfile(oddzial_csv.c_str());
-    //Nazwa: minPunktow - do znajdowania minimalnej liczby punktow w oddziale
-    int minPunktow = lista_uczniow_w_oddziale[0].podaj_liczba_punktow();
-    if (outfile.is_open())
-    {
-        for (int i = 0; i < liczba_uczniow_w_oddziale; i++)
-        {
-            outfile
-            //std::cout <<std::endl
-                    << lista_uczniow_w_oddziale[i].podaj_nazwisko() << ";"
-                    << lista_uczniow_w_oddziale[i].podaj_liczba_punktow() << ";"
-                    << lista_uczniow_w_oddziale[i].pokazPrzydzial()
-                    <<'\n';
-            if (lista_uczniow_w_oddziale[i].podaj_liczba_punktow() < minPunktow)
-            {
-                minPunktow = lista_uczniow_w_oddziale[i].podaj_liczba_punktow();
-            }
-        }
-        outfile
-        //std::cout
-        << "\n\nNajmniejsza liczba punktow z rekrutacji w oddziale :" << minPunktow;
+	int numerWyboru = -1, minimalnaLiczbaPunktow = lista_uczniow_w_oddziale[0].podaj_liczba_punktow();
+	segregujUczniow();
+	std::ofstream outfile(oddzial_csv.c_str());
+	if (outfile.is_open())
+	{
+		for (int i = 0; i < liczba_uczniow_w_oddziale; i++)
+		{
+			for (int x = 0; x < 3; x++) if (lista_uczniow_w_oddziale[i].podaj_wybor(x) == numerKlasy)
+			{
+				numerWyboru = x;
+				break;
+			}
+				outfile << lista_uczniow_w_oddziale[i].podaj_nazwisko() << ';' <<
+				lista_uczniow_w_oddziale[i].podaj_liczba_punktow() <<';' <<
+					numerWyboru <<'\n';
 
-        outfile.close();
-        return true;
-    }
-    else
-    {
-        std::cout << std::endl << "Error in: bool oddzial::wypiszListeUczniow(std::string oddzial_csv)\nNie udalo sie otworzyc pliku: " << oddzial_csv << std::endl;
-    }
-    return false;
+				if (minimalnaLiczbaPunktow > lista_uczniow_w_oddziale[i].podaj_liczba_punktow()) minimalnaLiczbaPunktow = lista_uczniow_w_oddziale[i].podaj_liczba_punktow();
+		}
+		outfile << minimalnaLiczbaPunktow << "\n";
+		outfile.close();
+		return true;
+	}
+	else
+	{
+		std::cout << "nie udalo sie otworzyc pliku: " << oddzial_csv << std::endl;
+	}
+	return false;
 }
 
 void oddzial::segregujUczniow()
 
 {
-    for (int i = liczba_uczniow_w_oddziale - 1; i >= 0; i--)
-        for (int l = 0; l<i; l++)
-        {
-            if (lista_uczniow_w_oddziale[l].podaj_nazwisko() > lista_uczniow_w_oddziale[l + 1].podaj_nazwisko())
-            {
-                std::swap(lista_uczniow_w_oddziale[l], lista_uczniow_w_oddziale[l + 1]);
-            }
-        }
+	for (int i = liczba_uczniow_w_oddziale - 1; i >= 0; i--)
+	for (int l = 0; l<i; l++)
+	{
+		if (lista_uczniow_w_oddziale[l].podaj_nazwisko() > lista_uczniow_w_oddziale[l + 1].podaj_nazwisko())
+		{
+			std::swap(lista_uczniow_w_oddziale[l], lista_uczniow_w_oddziale[l + 1]);
+		}
+	}
 }
